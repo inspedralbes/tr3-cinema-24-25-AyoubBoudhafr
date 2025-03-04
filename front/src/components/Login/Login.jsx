@@ -1,4 +1,3 @@
-// pages/login.jsx
 'use client';
 
 import React from 'react';

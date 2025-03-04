@@ -1,8 +1,7 @@
-// src/app/components/Navbar/Navbar.jsx
 'use client';
 
 import React from 'react';
-import Link from 'next/link';  // Importa Link de Next.js
+import Link from 'next/link';
 import './Navbar.css';
 
 const Navbar = ({ busqueda, setBusqueda }) => {

@@ -1,4 +1,3 @@
-// src/pages/index.jsx
 import React, { useState } from 'react';
 import Inicio from '../components/Inicio/Inicio';
 
