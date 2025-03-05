@@ -1,21 +1,27 @@
 import React from 'react';
 import './Navbar2.css';
 
+import { FaCar, FaBuilding, FaBookOpen, FaLaptop } from 'react-icons/fa';
+
 const Navbar2 = () => {
   return (
     <nav className="navbar2">
-      <select className="navbar-select">
-        <option value="moviles">Móviles</option>
-        <option value="portatiles">Portátiles</option>
-      </select>
-      <select className="navbar-select">
-        <option value="accesorios">Accesorios</option>
-        <option value="tablets">Tablets</option>
-      </select>
-      <select className="navbar-select">
-        <option value="audio">Audio</option>
-        <option value="gaming">Gaming</option>
-      </select>
+      <div className="nav2-item">
+        <FaCar className="nav2-icon" />
+        <span>Motor</span>
+      </div>
+      <div className="nav2-item">
+        <FaBuilding className="nav2-icon" />
+        <span>Inmobiliaria</span>
+      </div>
+      <div className="nav2-item">
+        <FaBookOpen className="nav2-icon" />
+        <span>Formación y libros</span>
+      </div>
+      <div className="nav2-item">
+        <FaLaptop className="nav2-icon" />
+        <span>Tecnologia</span>
+      </div>
     </nav>
   );
 };
