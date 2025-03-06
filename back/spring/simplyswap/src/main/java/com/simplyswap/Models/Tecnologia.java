@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-public class Producto {
+public class Tecnologia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,11 +20,11 @@ public class Producto {
     @Column(name = "imagen_url")
     private List<String> imagenes;
 
-    public Producto() {
+    public Tecnologia() {
 
     }
 
-    public Producto(String nombre, double precio, int categoria, String descripcion, List<String> imagenes, boolean envioDisponible) {
+    public Tecnologia(String nombre, double precio, int categoria, String descripcion, List<String> imagenes, boolean envioDisponible) {
         this.nombre = nombre;
         this.precio = precio;
         this.categoria = categoria;
