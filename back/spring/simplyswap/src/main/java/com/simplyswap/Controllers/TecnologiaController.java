@@ -4,12 +4,7 @@ import com.simplyswap.Models.Tecnologia;
 import com.simplyswap.Repository.TecnologiaRepository;
 import com.simplyswap.Models.mensajeRespuesta;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,6 +33,23 @@ public class TecnologiaController {
             return new mensajeRespuesta("Error al crear el producto.", false, null);
         }
     }
+    @PutMapping("/{id}")
+    public mensajeRespuesta actualizarProducto(@PathVariable Long id, @RequestBody Tecnologia productoActualizado){
+        Tecnologia producto = tecnologiaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
+
+        producto.setNombre(productoActualizado.getNombre());
+        producto.setPrecio(productoActualizado.getPrecio());
+        producto.setCategoria(productoActualizado.getCategoria());
+        producto.setDescripcion(productoActualizado.getDescripcion());
+        producto.setEnvioDisponible(productoActualizado.isEnvioDisponible());
+        producto.setImagenes(productoActualizado.getImagenes());
+
+        tecnologiaRepository.save(producto);
+
+        return new mensajeRespuesta("Producto actualizado con éxito.", true, producto);
+    }
+    @DeleteMapping
     public mensajeRespuesta eliminarProducto(@PathVariable Long id) {
         if (tecnologiaRepository.existsById(id)) {
             tecnologiaRepository.deleteById(id);
