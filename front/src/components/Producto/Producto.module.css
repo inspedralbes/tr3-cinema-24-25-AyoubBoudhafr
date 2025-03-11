@@ -8,9 +8,11 @@
   flex-direction: column;
   transition: transform 0.3s ease; 
 }
+
 .producto:hover{
   transform: scale(1.05);
 }
+
 .imagen-container {
   position: relative;
   margin-bottom: 15px;
@@ -57,17 +59,6 @@
   height: 24px;
 }
 
-h2 {
-  font-size: 18px;
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-p {
-  font-size: 14px;
-  color: #555;
-  line-height: 1.5;
-}
 .envio-info {
   display: flex;
   align-items: center;
@@ -85,6 +76,12 @@ p {
 }
 .disponible{
   color: rgb(7, 115, 7);
+}
+.precio{
+  color: black;
+}
+.nombre{
+  color: black;
 }
 .enPersona{
   color: rgb(151, 32, 181);

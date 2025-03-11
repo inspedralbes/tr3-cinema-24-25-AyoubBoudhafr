@@ -1,26 +1,29 @@
+'use client';
 import React from 'react';
-import './Navbar2.css';
-
+import styles from './Navbar2.module.css';  // Importación correcta de CSS Module
 import { FaCar, FaBuilding, FaBookOpen, FaLaptop } from 'react-icons/fa';
+import Link from 'next/link';
 
 const Navbar2 = () => {
   return (
-    <nav className="navbar2">
-      <div className="nav2-item">
-        <FaCar className="nav2-icon" />
+    <nav className={styles.navbar2}>
+      <div className={styles['nav2-item']}>
+        <FaCar className={styles['nav2-icon']} />
         <span>Motor</span>
       </div>
-      <div className="nav2-item">
-        <FaBuilding className="nav2-icon" />
+      <div className={styles['nav2-item']}>
+        <FaBuilding className={styles['nav2-icon']} />
         <span>Inmobiliaria</span>
       </div>
-      <div className="nav2-item">
-        <FaBookOpen className="nav2-icon" />
+      <div className={styles['nav2-item']}>
+        <FaBookOpen className={styles['nav2-icon']} />
         <span>Formación y libros</span>
       </div>
-      <div className="nav2-item">
-        <FaLaptop className="nav2-icon" />
-        <span>Tecnologia</span>
+      <div className={styles['nav2-item']}>
+      <Link href="/tecnologia">
+        <FaLaptop className={styles['nav2-icon']} />
+      </Link>
+        <span>Tecnología</span>
       </div>
     </nav>
   );

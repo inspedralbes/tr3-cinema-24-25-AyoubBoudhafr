@@ -79,4 +79,12 @@ public class Inmueble {
     public void setPais(String pais) {
         this.pais = pais;
     }
+
+    public List<String> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<String> imagenes) {
+        this.imagenes = imagenes;
+    }
 }

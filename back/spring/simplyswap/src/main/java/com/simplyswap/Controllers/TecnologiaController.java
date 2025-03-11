@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tecnologia")
+@RequestMapping("/api/tecnologia")
 public class TecnologiaController {
 
     @Autowired
@@ -28,9 +28,9 @@ public class TecnologiaController {
     public mensajeRespuesta crearProducto(@RequestBody Tecnologia producto){
         try {
             Tecnologia nuevoProducto = tecnologiaRepository.save(producto);
-            return new mensajeRespuesta("Producto creado con éxito.", true, nuevoProducto);
+            return new mensajeRespuesta("Producto creado con éxito.", true);
         } catch (Exception e) {
-            return new mensajeRespuesta("Error al crear el producto.", false, null);
+            return new mensajeRespuesta("Error al crear el producto.", false);
         }
     }
     @PutMapping("/{id}")
@@ -47,15 +47,15 @@ public class TecnologiaController {
 
         tecnologiaRepository.save(producto);
 
-        return new mensajeRespuesta("Producto actualizado con éxito.", true, producto);
+        return new mensajeRespuesta("Producto actualizado con éxito.", true);
     }
     @DeleteMapping
     public mensajeRespuesta eliminarProducto(@PathVariable Long id) {
         if (tecnologiaRepository.existsById(id)) {
             tecnologiaRepository.deleteById(id);
-            return new mensajeRespuesta("Producto eliminado correctamente", true, null);
+            return new mensajeRespuesta("Producto eliminado correctamente", true);
         } else {
-            return new mensajeRespuesta("Error al eliminar el producto.", false, null);
+            return new mensajeRespuesta("Error al eliminar el producto.", false);
         }
     }
 }
