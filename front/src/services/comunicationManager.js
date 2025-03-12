@@ -1,10 +1,10 @@
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL_SPRING = process.env.NEXT_PUBLIC_API_URL_SPRING;
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 export const getProductosTecnologicos = async () => {
   try {
-    const url = `${API_URL}/tecnologia`;  
+    const url = `${API_URL_SPRING}/tecnologia`;  
 
     const response = await fetch(url);
 
@@ -20,20 +20,19 @@ export const getProductosTecnologicos = async () => {
   }
 };
 
-export const fetchPostData = async (postData) => {
+export const crearTecnologico = async (tecnologia) => {
   try {
-    const response = await fetch(`${API_URL}/tecnologia`, {
+    const response = await fetch(`${API_URL_SPRING}/tecnologia`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(postData),
+      body: JSON.stringify(tecnologia),
     });
 
     if (!response.ok) {
       throw new Error('Error en la solicitud POST');
     }
-
     const data = await response.json();
     return data;
   } catch (error) {

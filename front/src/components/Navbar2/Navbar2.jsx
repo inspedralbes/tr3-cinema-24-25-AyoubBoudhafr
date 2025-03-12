@@ -8,22 +8,28 @@ const Navbar2 = () => {
   return (
     <nav className={styles.navbar2}>
       <div className={styles['nav2-item']}>
+        <Link href="/motor">
         <FaCar className={styles['nav2-icon']} />
         <span>Motor</span>
+        </Link>
       </div>
       <div className={styles['nav2-item']}>
+        <Link href="/inmobiliaria">
         <FaBuilding className={styles['nav2-icon']} />
+        </Link>
         <span>Inmobiliaria</span>
       </div>
       <div className={styles['nav2-item']}>
+        <Link href="/libro">
         <FaBookOpen className={styles['nav2-icon']} />
         <span>Formación y libros</span>
+        </Link>
       </div>
       <div className={styles['nav2-item']}>
       <Link href="/tecnologia">
         <FaLaptop className={styles['nav2-icon']} />
-      </Link>
         <span>Tecnología</span>
+      </Link>
       </div>
     </nav>
   );
