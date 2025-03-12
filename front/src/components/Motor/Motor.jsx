@@ -1,7 +1,7 @@
 import React from 'react';
 import Producto from '../Producto/Producto';
 import {getProductosTecnologicos} from '../../services/comunicationManager';
-import './Tecnologia.module.css'
+
 let productos = await getProductosTecnologicos();
 const Inicio = ({ busqueda }) => {
   const productosFiltrados = productos.filter((p) =>
