@@ -71,7 +71,7 @@
   }
   
   .precio {
-    color: rgb(7, 115, 7); /* Verde */
+    color: rgb(7, 115, 7);
     font-size: 1.5rem;
     font-weight: bold;
     margin: 0;
@@ -102,13 +102,8 @@
     line-height: 1.4;
     margin: 0;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-  }
-  
-  .descripcionCompleta {
-    -webkit-line-clamp: unset;
   }
   
   .botonDescripcion {
@@ -155,7 +150,7 @@
   }
   
   .disponible {
-    color: rgb(7, 115, 7); /* Verde */
+    color: rgb(7, 115, 7); 
     font-weight: 500;
     font-size: 0.9rem;
     display: flex;
@@ -164,7 +159,7 @@
   }
   
   .enPersona {
-    color: rgb(151, 32, 181); /* Morado */
+    color: rgb(151, 32, 181);
     font-weight: 500;
     font-size: 0.9rem;
     display: flex;
@@ -178,7 +173,6 @@
     fill: currentColor;
   }
   
-  /* Estilos responsive */
   @media (max-width: 480px) {
     .producto {
       width: 100%;
