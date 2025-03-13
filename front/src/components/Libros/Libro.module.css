@@ -1,0 +1,15 @@
+.contenedor {
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .contenedor {
+    grid-template-columns: 1fr;
+    padding: 1rem 0.5rem;
+  }
+}

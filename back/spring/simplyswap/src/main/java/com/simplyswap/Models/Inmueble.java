@@ -16,6 +16,7 @@ public class Inmueble {
     private String direccion;
     private String ciudad;
     private String pais;
+    private double precio;
 
     @ElementCollection
     @CollectionTable(name = "inmueble_imagenes", joinColumns = @JoinColumn(name = "inmueble_id"))
@@ -24,13 +25,20 @@ public class Inmueble {
     public Inmueble(){
 
     }
-    public Inmueble(Long id, String descripcionShort, String descripcion, String direccion, String ciudad, String pais) {
+    public Inmueble(Long id, String descripcionShort, String descripcion, String direccion, String ciudad, String pais, double precio) {
         this.id = id;
         this.descripcionShort = descripcionShort;
         this.descripcion = descripcion;
         this.direccion = direccion;
         this.ciudad = ciudad;
         this.pais = pais;
+    }
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
     public Long getId() {
         return id;

@@ -1,30 +1,32 @@
-import React from 'react';
-import Producto from '../Producto/Producto';
-import {getProductosTecnologicos} from '../../services/comunicationManager';
-let productos = await getProductosTecnologicos();
-const Inicio = ({ busqueda }) => {
-  const productosFiltrados = productos.filter((p) =>
-    p.nombre.toLowerCase().includes(busqueda.toLowerCase())
+'use client';
+import React, { useEffect, useState } from 'react';
+import Libro from './Libro_item/Libro';
+import { getLibros } from '../../services/comunicationManager';
+import styles from './Libro.module.css';
+
+const Libros = ({ busqueda }) => {
+  const [libros, setLibros] = useState([]);
+
+  useEffect(() => {
+    const cargarLibros = async () => {
+      const datos = await getLibros();
+      setLibros(datos);
+    };
+    cargarLibros();
+  }, []);
+
+  const librosFiltrados = libros.filter(libro =>
+    libro.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+    libro.descripcion.toLowerCase().includes(busqueda.toLowerCase())
   );
 
   return (
-    <div style={{ padding: '20px', backgroundColor: '#f7f7f7' }}>
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          margin: '0 4rem'
-        }}
-      >
-        {productosFiltrados.length > 0 ? (
-          productosFiltrados.map((p) => <Producto key={p.id} {...p} />)
-        ) : (
-          <p style={{ fontSize: '18px', color: '#555' }}>No se encontraron productos</p>
-        )}
-      </div>
+    <div className={styles.contenedor}>
+      {librosFiltrados.map((libro) => (
+        <Libro key={libro.id} {...libro} />
+      ))}
     </div>
   );
 };
 
-export default Inicio;
+export default Libros;

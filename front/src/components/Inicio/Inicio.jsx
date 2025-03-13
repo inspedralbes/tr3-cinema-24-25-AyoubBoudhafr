@@ -1,5 +1,5 @@
 import React from 'react';
-import Producto from '../Producto/Producto';
+import Producto from '../Tecnologia/Tecnologia_item/Producto';
 import {getProductosTecnologicos} from '../../services/comunicationManager';
 
 let productos = await getProductosTecnologicos();
