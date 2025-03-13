@@ -1,21 +1,17 @@
-// components/Motores/Motor_item/Motor.js
 'use client';
 import React, { useState } from 'react';
 import styles from './Motor.module.css';
 
 const Motor = ({
-  id,
   marca,
   modelo,
   precio,
   kilometraje,
   descripcion,
   imagenes,
-  envioDisponible,
-  fechaPublicacion
+  envioDisponible
 }) => {
   const [imagenIndex, setImagenIndex] = useState(0);
-  const fecha = new Date(fechaPublicacion).toLocaleDateString('es-ES');
 
   const siguienteImagen = () => {
     setImagenIndex(prev => (prev < imagenes.length - 1 ? prev + 1 : 0));
@@ -34,27 +30,25 @@ const Motor = ({
           className={styles['imagen-motor']}
         />
 
-        {imagenes.length > 1 && (
-          <>
-            <button onClick={anteriorImagen} className={`${styles['boton-imagen']} ${styles.left}`}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                <path d="M16 4l-8 8 8 8" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
+        <button onClick={anteriorImagen} className={`${styles['boton-imagen']} ${styles.left}`}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path d="M16 4l-8 8 8 8" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
 
-            <button onClick={siguienteImagen} className={`${styles['boton-imagen']} ${styles.right}`}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                <path d="M8 4l8 8-8 8" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-          </>
-        )}
+        <button onClick={siguienteImagen} className={`${styles['boton-imagen']} ${styles.right}`}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path d="M8 4l8 8-8 8" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
       </div>
 
       <div className={styles.contenido}>
-        <h2 className={styles.titulo}>{marca} {modelo}</h2>
-        <p className={styles.precio}>{precio.toLocaleString('es-ES')}€</p>
-        
+        <div className={styles.header}>
+          <h2 className={styles.titulo}>{marca} {modelo}</h2>
+          <h3 className={styles.precio}>{precio.toLocaleString('es-ES')}€</h3>
+        </div>
+
         <div className={styles.detalles}>
           <div className={styles.metaInfo}>
             <span className={styles.kilometraje}>
@@ -63,16 +57,10 @@ const Motor = ({
               </svg>
               {kilometraje.toLocaleString('es-ES')} km
             </span>
-            <span className={styles.fecha}>
-              <svg className={styles.icono} viewBox="0 0 24 24">
-                <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5z"/>
-              </svg>
-              {fecha}
-            </span>
           </div>
-          
+
           <p className={styles.descripcion}>{descripcion}</p>
-          
+
           <div className={styles['envio-info']}>
             {envioDisponible ? (
               <span className={styles.disponible}>
