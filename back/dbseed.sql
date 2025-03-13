@@ -1,49 +1,62 @@
--- Inserción de datos en la tabla Inmueble
-INSERT INTO inmueble (descripcion_short, descripcion, direccion, ciudad, pais)
+INSERT INTO inmueble (descripcion_short, descripcion, direccion, ciudad, pais, precio)
 VALUES 
-('Hermoso apartamento', 'Apartamento de lujo con vista al mar', 'Av. Principal 123', 'Barcelona', 'España'),
-('Casa acogedora', 'Casa con amplio jardín y piscina', 'Calle Falsa 456', 'Madrid', 'España');
+('Hermoso apartamento', 'Apartamento de lujo con vista al mar', 'Av. Principal 123', 'Barcelona', 'España'650000),
+('Casa acogedora', 'Casa con amplio jardín y piscina', 'Av. Diagonal 456', 'Madrid', 'España',199000);
 
--- Inserción de imágenes de Inmueble
 INSERT INTO inmueble_imagenes (inmueble_id, imagen_url)
 VALUES 
-(1, '/assets/apartamento1.jpg'),
-(1, '/assets/apartamento2.jpg'),
-(2, '/assets/casa1.jpg');
+(1, '/assets/hermosoApartamento.webp'),
+(1, '/assets/hermosoApartamento2.webp'),
+(1, '/assets/hermosoApartamento3.webp'),
+(1, '/assets/hermosoApartamento4.webp'),
+(1, '/assets/hermosoApartamento5.webp'),
+(2, '/assets/casaAcojedora.webp'),
+(2, '/assets/casaAcojedora2.webp'),
+(2, '/assets/casaAcojedora3.webp'),
+(2, '/assets/casaAcojedora4.webp'),
+(2, '/assets/casaAcojedora5.webp'),
+(2, '/assets/casaAcojedora6.webp');
 
--- Inserción de datos en la tabla Libro
 INSERT INTO libro (precio, nombre, descripcion, fecha_publicacion, entrega_disponible)
 VALUES 
 (15.99, 'El principito', 'Libro clásico de Antoine de Saint-Exupéry', '1943-04-06', TRUE),
 (25.50, '1984', 'Novela distópica de George Orwell', '1949-06-08', FALSE);
 
--- Inserción de imágenes de Libro
 INSERT INTO libro_imagenes (libro_id, imagen_url)
 VALUES 
-(1, '/assets/principito.jpg'),
-(2, '/assets/1984.jpg');
+(1, '/assets/principito.webp'),
+(1, '/assets/principito2.webp'),
+(2, '/assets/1984.webp'),
+(2, '/assets/1984_2.webp');
 
--- Inserción de datos en la tabla Motor
 INSERT INTO motor (marca, modelo, precio, kilometraje, descripcion, envio_disponible, fecha_publicacion)
 VALUES 
 ('Toyota', 'Corolla', 12000, 50000, 'Toyota Corolla en excelente estado', TRUE, NOW()),
 ('Honda', 'Civic', 15000, 30000, 'Honda Civic 2020, poco uso', FALSE, NOW());
 
--- Inserción de imágenes de Motor
 INSERT INTO motor_imagenes (motor_id, imagen_url)
 VALUES 
-(1, '/assets/toyota_corolla1.jpg'),
-(2, '/assets/honda_civic1.jpg');
+(1, '/assets/toyota_corolla.webp'),
+(1, '/assets/toyota_corolla2.webp'),
+(1, '/assets/toyota_corolla3.webp'),
+(1, '/assets/toyota_corolla4.webp'),
+(1, '/assets/toyota_corolla5.webp'),
+(1, '/assets/toyota_corolla6.webp'),
+(2, '/assets/honda_civic.webp'),
+(2, '/assets/honda_civic2.webp'),
+(2, '/assets/honda_civic3.webp'),
+(2, '/assets/honda_civic4.webp'),
+(2, '/assets/honda_civic5.webp'),
+(2, '/assets/honda_civic6.webp'),
+(2, '/assets/honda_civic7.webp'),
+(2, '/assets/honda_civic8.webp');
 
--- Inserción de datos en la tabla Usuario
 INSERT INTO usuarios (nombre, email, password, telefono, ciudad, pais, foto_perfil)
 VALUES 
-('Juan Pérez', 'juanperez@example.com', 'password123', '123456789', 'Madrid', 'España', '/assets/juan.jpg'),
-('María García', 'maria@example.com', 'pass456', '987654321', 'Barcelona', 'España', '/assets/maria.jpg');
+('Juan Pérez', 'juanperez@example.com', 'password123', '123456789', 'Madrid', 'España', '/assets/juan.webp'),
+('María García', 'maria@example.com', 'pass456', '987654321', 'Barcelona', 'España', '/assets/maria.webp');
 
 
-
--- Inserción de datos en la tabla Tecnologia (extraídos del JSON proporcionado)
 INSERT INTO tecnologia (id, nombre, precio, categoria, descripcion, envio_disponible)
 VALUES 
 (1, 'iPhone 13', 799, 1, 'iPhone 13 en excelente estado', TRUE),
@@ -57,7 +70,6 @@ VALUES
 (9, 'Apple Watch Series 7', 399, 1, 'Apple Watch con pantalla Retina Always-On', FALSE),
 (10, 'AirPods Pro', 249, 1, 'Auriculares inalámbricos con cancelación de ruido', TRUE);
 
--- Inserción de imágenes de Tecnologia
 INSERT INTO producto_imagenes (producto_id, imagen_url)
 VALUES 
 (1, '/assets/iphone13_1.webp'),

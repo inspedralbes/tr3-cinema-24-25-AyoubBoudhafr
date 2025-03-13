@@ -45,7 +45,8 @@ public class InmuebleController {
         inmuebleExistente.setCiudad(inmuebleActualizado.getCiudad());
         inmuebleExistente.setPais(inmuebleActualizado.getPais());
         inmuebleExistente.setImagenes(inmuebleActualizado.getImagenes());
-
+        inmuebleExistente.setPrecio(inmuebleActualizado.getPrecio());
+        
         inmuebleRepository.save(inmuebleExistente);
         return new mensajeRespuesta("Inmueble actualizado con éxito.", true);
     }

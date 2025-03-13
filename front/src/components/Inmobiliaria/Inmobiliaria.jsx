@@ -1,4 +1,3 @@
-// components/Inmuebles/Inmuebles.js
 'use client';
 import React from 'react';
 import Inmueble from './Inmueble_item/Inmueble';

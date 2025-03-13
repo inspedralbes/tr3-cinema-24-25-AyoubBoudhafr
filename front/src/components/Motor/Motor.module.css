@@ -1,0 +1,24 @@
+/* components/Motores/Motores.module.css */
+.contenedor {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .sinResultados {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    grid-column: 1 / -1;
+    margin-top: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .contenedor {
+      padding: 1rem;
+      grid-template-columns: 1fr;
+    }
+  }
