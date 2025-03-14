@@ -11,10 +11,11 @@ const Motores = ({ busqueda }) => {
     const cargarMotores = async () => {
       const datos = await getMotor();
       setMotores(datos);
+      console.log('datos motor',datos);
     };
     cargarMotores();
   }, []);
-
+  
   const motoresFiltrados = motores.filter(motor =>
     motor.marca.toLowerCase().includes(busqueda.toLowerCase()) ||
     motor.modelo.toLowerCase().includes(busqueda.toLowerCase()) ||
