@@ -4,7 +4,7 @@ import {getProductosTecnologicos} from '../../services/comunicationManager';
 
 let productos = await getProductosTecnologicos();
 const Inicio = ({ busqueda }) => {
-  const productosFiltrados = productos.filter((p) =>
+  const productosFiltrados = (productos || []).filter((p) =>
     p.nombre.toLowerCase().includes(busqueda.toLowerCase())
   );
 

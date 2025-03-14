@@ -1,19 +1,20 @@
 .motor {
-    display: flex;
-    width: 100%;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-    gap: 2rem;
-  }
-  
-  .motor:hover {
-    transform: translateY(-3px);
-  }
+  position: relative;
+  padding: 20px;
+  margin: 20px auto; 
+  border-radius: 10px;
+  width: 80%;       
+  max-width: 1000px; 
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.motor:hover {
+  transform: scale(1.02);
+}
   
   .imagen-container {
     position: relative;
