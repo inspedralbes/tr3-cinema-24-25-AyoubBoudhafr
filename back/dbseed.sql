@@ -1,6 +1,6 @@
 INSERT INTO inmueble (descripcion_short, descripcion, direccion, ciudad, pais, precio)
 VALUES 
-('Hermoso apartamento', 'Apartamento de lujo con vista al mar', 'Av. Principal 123', 'Barcelona', 'España'650000),
+('Hermoso apartamento', 'Apartamento de lujo con vista al mar', 'Av. Principal 123', 'Barcelona', 'España',650000),
 ('Casa acogedora', 'Casa con amplio jardín y piscina', 'Av. Diagonal 456', 'Madrid', 'España',199000);
 
 INSERT INTO inmueble_imagenes (inmueble_id, imagen_url)
