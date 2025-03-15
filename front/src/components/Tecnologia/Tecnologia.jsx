@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Producto from './Tecnologia_item/Producto';
 import { getProductosTecnologicos } from '../../services/comunicationManager';
+
 const Tecnologia = ({ busqueda }) => {
   const [productos, setProductos] = useState([]);
   useEffect(() => {
@@ -8,6 +9,7 @@ const Tecnologia = ({ busqueda }) => {
     const fetchProductos = async () => {
       const productosObtenidos = await getProductosTecnologicos();
       setProductos(productosObtenidos);
+      
     };
 
     fetchProductos();

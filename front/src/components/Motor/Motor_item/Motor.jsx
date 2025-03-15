@@ -12,7 +12,8 @@ const Motor = ({
   envioDisponible
 }) => {
   const [imagenIndex, setImagenIndex] = useState(0);
-
+  console.log('todo lo que llega: marca->'+marca+'modelo'+modelo+'precio'+precio+'kilometraje'+kilometraje+'descripcion'+descripcion+'imagenes'+imagenes+'enviodisponible'+envioDisponible);
+  
   const siguienteImagen = () => {
     setImagenIndex(prev => (prev < imagenes.length - 1 ? prev + 1 : 0));
   };
@@ -46,7 +47,7 @@ const Motor = ({
       <div className={styles.contenido}>
         <div className={styles.header}>
           <h2 className={styles.titulo}>{marca} {modelo}</h2>
-          <h3 className={styles.precio}>{precio.toLocaleString('es-ES')}€</h3>
+          <h3 className={styles.precio}>{precio}€</h3>
         </div>
 
         <div className={styles.detalles}>
@@ -55,7 +56,7 @@ const Motor = ({
               <svg className={styles.icono} viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9C4.63 15.55 4 13.85 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1C19.37 8.45 20 10.15 20 12c0 4.42-3.58 8-8 8z"/>
               </svg>
-              {kilometraje.toLocaleString('es-ES')} km
+              {kilometraje} km
             </span>
           </div>
 

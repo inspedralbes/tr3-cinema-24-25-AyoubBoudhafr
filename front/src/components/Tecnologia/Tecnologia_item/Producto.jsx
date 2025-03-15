@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import styles from './Producto.module.css';  
 
 const Producto = ({ nombre, precio, descripcion, imagenes, envioDisponible }) => {
-  console.log('Envio disponible', envioDisponible);
 
   const [imagenIndex, setImagenIndex] = useState(0);
 
