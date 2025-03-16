@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Libro from '../src/components/Libros/Libro';
+import Libro from '../components/Libros/Libro';
 
 export default function LibroPage(){
   const [busqueda, setBusqueda] = useState('');

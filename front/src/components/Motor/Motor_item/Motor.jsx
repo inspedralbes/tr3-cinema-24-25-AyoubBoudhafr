@@ -46,7 +46,7 @@ const Motor = ({
       <div className={styles.contenido}>
         <div className={styles.header}>
           <h2 className={styles.titulo}>{marca} {modelo}</h2>
-          <h3 className={styles.precio}>{precio}€</h3>
+          <h3 className={styles.precio}>{precio}{'\u20AC'}</h3>
         </div>
 
         <div className={styles.detalles}>

@@ -4,7 +4,7 @@ import styles from './Libro.module.css';
 
 const Libro = ({ 
   nombre, 
-  precio, 
+  precio,
   descripcion, 
   imagenes, 
   entregaDisponible, 
@@ -56,7 +56,7 @@ const Libro = ({
       </div>
 
       <div className={styles.contenido}>
-        <h2 className={styles.precio}>{precio}€</h2>
+      <h2 className={styles.precio}>{precio}{'\u20AC'}</h2>
         <p className={styles.nombre}>{nombre}</p>
         <p className={styles.autor}>por {autor}</p>
         
