@@ -31,7 +31,7 @@ VALUES
 
 INSERT INTO motor (marca, modelo, precio, kilometraje, descripcion, envio_disponible, fecha_publicacion)
 VALUES 
-('Toyota', 'Corolla', 12000.5, 50000, 'Toyota Corolla en excelente estado', TRUE, NOW()),
+('Toyota', 'Corolla', 12000, 50000, 'Toyota Corolla en excelente estado', TRUE, NOW()),
 ('Honda', 'Civic', 15000, 30000, 'Honda Civic 2020, poco uso', FALSE, NOW());
 
 INSERT INTO motor_imagenes (motor_id, imagen_url)

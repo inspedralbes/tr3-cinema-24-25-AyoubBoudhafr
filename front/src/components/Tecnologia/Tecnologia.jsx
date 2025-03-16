@@ -4,14 +4,12 @@ import { getProductosTecnologicos } from '../../services/comunicationManager';
 
 const Tecnologia = ({ busqueda }) => {
   const [productos, setProductos] = useState([]);
-  useEffect(() => {
 
+  useEffect(() => {
     const fetchProductos = async () => {
       const productosObtenidos = await getProductosTecnologicos();
       setProductos(productosObtenidos);
-      
     };
-
     fetchProductos();
   }, []);
   const productosFiltrados = productos.filter((p) =>

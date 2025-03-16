@@ -12,7 +12,6 @@ const Motor = ({
   envioDisponible
 }) => {
   const [imagenIndex, setImagenIndex] = useState(0);
-  console.log('todo lo que llega: marca->'+marca+'modelo'+modelo+'precio'+precio+'kilometraje'+kilometraje+'descripcion'+descripcion+'imagenes'+imagenes+'enviodisponible'+envioDisponible);
   
   const siguienteImagen = () => {
     setImagenIndex(prev => (prev < imagenes.length - 1 ? prev + 1 : 0));
