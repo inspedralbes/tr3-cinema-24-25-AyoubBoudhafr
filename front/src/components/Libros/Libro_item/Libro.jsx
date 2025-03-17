@@ -28,7 +28,8 @@ const Libro = ({
   const anteriorImagen = () => {
     setImagenIndex((prev) => (prev > 0 ? prev - 1 : imagenes.length - 1));
   };
-
+  console.log('autor',autor);
+  
   return (
     <div className={styles.producto}>
       <div className={styles['imagen-container']}>

@@ -1,6 +1,8 @@
 package com.simplyswap.Models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+
 import java.util.Date;
 import java.util.List;
 
@@ -10,12 +12,16 @@ public class Motor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(nullable = false)
     private String marca;
     private String modelo;
+    @Column(nullable = false)
+    @Min(value = 0)
     private double precio;
+    @Column(nullable = false)
     private int kilometraje;
     private String descripcion;
+    @Column(nullable = false)
     private boolean envioDisponible;
 
     @Temporal(TemporalType.TIMESTAMP)

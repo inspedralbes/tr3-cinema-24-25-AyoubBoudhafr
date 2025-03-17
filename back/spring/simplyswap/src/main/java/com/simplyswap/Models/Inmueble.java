@@ -1,6 +1,7 @@
 package com.simplyswap.Models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 
 import java.util.List;
 
@@ -10,12 +11,17 @@ public class Inmueble {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 100)
+    @Column(length = 100, nullable = false)
     private String descripcionShort;
     private String descripcion;
+    @Column(nullable = false)
     private String direccion;
+    @Column(nullable = false)
     private String ciudad;
+    @Column(nullable = false)
     private String pais;
+    @Column(nullable = false)
+    @Min(value=0)
     private double precio;
 
     @ElementCollection

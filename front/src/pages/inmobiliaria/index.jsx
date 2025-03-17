@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Inmobiliaria from '../components/Inmobiliaria/Inmobiliaria';
+import Inmobiliaria from '../../components/Inmobiliaria/Inmobiliaria';
 
 export default function InmueblesPage(){
   const [busqueda, setBusqueda] = useState('');

@@ -1,6 +1,8 @@
 package com.simplyswap.Models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -13,7 +15,10 @@ public class Libro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
+    @Min(value = 0)
     private double precio;
+    @Column(nullable = false)
     private String nombre;
 
     @ElementCollection
@@ -23,20 +28,30 @@ public class Libro {
     private List<String> imagenes;
 
     private String descripcion;
-
+    private String autor;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaPublicacion;
+    @Column(nullable = false)
     private boolean entregaDisponible;
     public Libro(){
 
     }
-    public Libro(Long id, double precio, String nombre, String descripcion, Date fechaPublicacion, boolean entregaDisponible) {
+    public Libro(Long id, double precio, String nombre, String autor, String descripcion, Date fechaPublicacion, boolean entregaDisponible) {
         this.id = id;
         this.precio = precio;
         this.nombre = nombre;
+        this.autor = autor;
         this.descripcion = descripcion;
         this.fechaPublicacion = fechaPublicacion;
         this.entregaDisponible = entregaDisponible;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 
     public Long getId() {

@@ -1,6 +1,8 @@
 package com.simplyswap.Models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+
 import java.util.List;
 
 @Entity
@@ -9,10 +11,14 @@ public class Tecnologia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String nombre;
+    @Column(nullable = false)
+    @Min(value = 0)
     private double precio;
     private int categoria;
     private String descripcion;
+    @Column(nullable = false)
     private boolean envioDisponible;
 
     @ElementCollection

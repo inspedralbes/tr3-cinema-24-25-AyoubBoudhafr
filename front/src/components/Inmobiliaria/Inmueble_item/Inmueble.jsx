@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import styles from './Inmueble.module.css';
 
 const Inmueble = ({
@@ -11,6 +12,7 @@ const Inmueble = ({
   pais,
   imagenes
 }) => {
+  const router = useRouter()
   const [imagenIndex, setImagenIndex] = useState(0);
 
   const siguienteImagen = () => {
@@ -20,9 +22,12 @@ const Inmueble = ({
   const anteriorImagen = () => {
     setImagenIndex((prev) => (prev > 0 ? prev - 1 : imagenes.length - 1));
   };
+  const handleClick = () => {
+    router.push(`/inmobiliaria/${id}`);
+  };
 
   return (
-    <div className={styles.inmueble}>
+    <div className={styles.inmueble} onClick={handleClick}>
       <div className={styles['imagen-container']}>
         <img
           src={imagenes[imagenIndex]}

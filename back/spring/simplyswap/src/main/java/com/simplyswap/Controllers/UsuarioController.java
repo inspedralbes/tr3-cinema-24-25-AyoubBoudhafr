@@ -2,7 +2,10 @@ package com.simplyswap.Controllers;
 
 import com.simplyswap.Models.Usuario;
 import com.simplyswap.Models.mensajeRespuesta;
+import com.simplyswap.Models.LoginResponse;
 import com.simplyswap.Repository.UserRepository;
+import com.simplyswap.Util.TokenUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -68,19 +71,31 @@ public class UsuarioController {
         if (usuarioRepository.findByEmail(usuario.getEmail()) != null) {
             return new mensajeRespuesta("El email ya está en uso.", false);
         }
-        usuarioRepository.save(usuario);
+
+        Usuario nuevoUsuario = new Usuario.Builder()
+                .setNombre(usuario.getNombre())
+                .setEmail(usuario.getEmail())
+                .setPassword(usuario.getPassword())
+                .setTelefono(usuario.getTelefono())
+                .setCiudad(usuario.getCiudad())
+                .setPais(usuario.getPais())
+                .setFotoPerfil(usuario.getFotoPerfil())
+                .build();
+
+        usuarioRepository.save(nuevoUsuario);
         return new mensajeRespuesta("Usuario registrado con éxito.", true);
     }
 
     @PostMapping("/login")
-    public mensajeRespuesta login(@RequestBody Usuario usuario) {
+    public LoginResponse login(@RequestBody Usuario usuario) {
         Usuario user = usuarioRepository.findByEmail(usuario.getEmail());
         if (user == null) {
-            return new mensajeRespuesta("Usuario no encontrado.", false);
+            return new LoginResponse(false, "Usuario no encontrado.", null);
         }
         if (!user.getPassword().equals(usuario.getPassword())) {
-            return new mensajeRespuesta("Contraseña incorrecta.", false);
+            return new LoginResponse(false, "Contraseña incorrecta.", null);
         }
-        return new mensajeRespuesta("Inicio de sesión exitoso.", true);
+        String token = TokenUtil.generateToken(user);
+        return new LoginResponse(true, "Inicio de sesión exitoso.", token);
     }
 }
