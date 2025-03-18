@@ -16,8 +16,7 @@ const Inmuebles = ({ busqueda }) => {
   }, []);
 
   const inmueblesFiltrados = inmuebles.filter(
-    (i) => i.descripcionShort.toLowerCase().includes(busqueda.toLowerCase()) ||
-           i.ciudad.toLowerCase().includes(busqueda.toLowerCase())
+    (i) => i.descripcionShort.toLowerCase().includes(busqueda.toLowerCase())
   );
 
   return (

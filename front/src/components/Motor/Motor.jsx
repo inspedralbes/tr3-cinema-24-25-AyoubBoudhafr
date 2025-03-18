@@ -16,8 +16,7 @@ const Motores = ({ busqueda }) => {
   }, []);
   
   const motoresFiltrados = motores.filter(motor =>
-    motor.marca.toLowerCase().includes(busqueda.toLowerCase()) ||
-    motor.modelo.toLowerCase().includes(busqueda.toLowerCase())
+    motor.marca.toLowerCase().includes(busqueda.toLowerCase())
   );
 
   return (

@@ -46,7 +46,6 @@ public class MotorController {
         motor.setPrecio(motorActualizado.getPrecio());
         motor.setKilometraje(motorActualizado.getKilometraje());
         motor.setDescripcion(motorActualizado.getDescripcion());
-        motor.setEnvioDisponible(motorActualizado.isEnvioDisponible());
         motor.setImagenes(motorActualizado.getImagenes());
 
         motorRepository.save(motor);

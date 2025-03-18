@@ -4,7 +4,7 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 export const getProductosTecnologicos = async () => {
   try {
-
+    
     const response = await fetch(`${API_URL_SPRING}/tecnologia`);
 
     if (!response.ok) {
@@ -93,7 +93,7 @@ export const login = async (credenciales) => {
 }
 export const register = async (credenciales) => {
   try{
-    const response = fetch(`${API_URL_SPRING}/usuario/register`,{
+    const response = await fetch(`${API_URL_SPRING}/usuario/register`,{
       method: 'POST',
       headers:{
         'Content-Type': 'application/json',
@@ -142,7 +142,7 @@ export const getUnLibro = async (id) => {
 }
 export const getUnInmueble = async (id) =>{
   try{
-    const response = fetch(`${API_URL_SPRING}/inmuebles/${id}`);
+    const response = await fetch(`${API_URL_SPRING}/inmuebles/${id}`);
     if(!response.ok){
       throw new Error('Error la solicitud GET de inmueble')
     }
@@ -155,7 +155,7 @@ export const getUnInmueble = async (id) =>{
 }
 export const getUnMotor = async (id) =>{
   try{
-    const response = fetch(`${API_URL_SPRING}/motor/${id}`);
+    const response = await fetch(`${API_URL_SPRING}/motor/${id}`);
     if(!response.ok){
       throw new Error('Error la solicitud GET de motor')
     }
@@ -170,7 +170,7 @@ export const getUnaTecnologia = async (id) =>{
   console.log(`${API_URL_SPRING}/tecnologia/${id}`);
   
   try{
-    const response = fetch(`${API_URL_SPRING}/tecnologia/${id}`);
+    const response = await fetch(`${API_URL_SPRING}/tecnologia/${id}`);
     if(!response.ok){
       throw new Error('Error la solicitud GET de motor')
     }

@@ -4,7 +4,7 @@ import {getUnInmueble} from '../../services/comunicationManager'
 
 const InmuebleDetalles = () => {
   const router = useRouter();
-  const { id } = router.query; // Capturamos el 'id' de la URL
+  const { id } = router.query;
   const [inmueble, setInmueble] = useState(null);
 
   useEffect(() => {

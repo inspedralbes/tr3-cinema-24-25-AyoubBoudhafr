@@ -10,14 +10,15 @@ const Libros = ({ busqueda }) => {
   useEffect(() => {
     const cargarLibros = async () => {
       const datos = await getLibros();
+      console.log(datos);
+      
       setLibros(datos);
     };
     cargarLibros();
   }, []);
 
   const librosFiltrados = libros.filter(libro =>
-    libro.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
-    libro.descripcion.toLowerCase().includes(busqueda.toLowerCase())
+    libro.nombre.toLowerCase().includes(busqueda.toLowerCase())
   );
 
   return (

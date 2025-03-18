@@ -5,7 +5,7 @@ import {getUnInmueble} from '../../services/comunicationManager'
 const InmuebleDetalles = () => {
   const router = useRouter();
   const { id } = router.query; 
-  const [inmueble, setInmueble] = useState(null);
+  const [motor, setInmueble] = useState(null);
 
   useEffect(() => {
     if (id) {

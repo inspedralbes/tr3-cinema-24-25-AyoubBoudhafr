@@ -33,10 +33,10 @@
     (2, '/assets/1984.webp'),
     (2, '/assets/1984_2.webp');
 
-    INSERT INTO motor (marca, modelo, precio, kilometraje, descripcion, envio_disponible, fecha_publicacion)
+    INSERT INTO motor (marca, modelo, precio, kilometraje, descripcion, fecha_publicacion)
     VALUES 
-    ('Toyota', 'Corolla', 12000, 50000, 'Toyota Corolla en excelente estado', TRUE, NOW()),
-    ('Honda', 'Civic', 15000, 30000, 'Honda Civic 2020, poco uso', FALSE, NOW());
+    ('Toyota', 'Corolla', 12000, 50000, 'Toyota Corolla en excelente estado', NOW()),
+    ('Honda', 'Civic', 15000, 30000, 'Honda Civic 2020, poco uso', NOW());
 
     INSERT INTO motor_imagenes (motor_id, imagen_url)
     VALUES 

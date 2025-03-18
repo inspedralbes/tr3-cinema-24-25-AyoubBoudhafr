@@ -21,8 +21,6 @@ public class Motor {
     @Column(nullable = false)
     private int kilometraje;
     private String descripcion;
-    @Column(nullable = false)
-    private boolean envioDisponible;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, updatable = false)
@@ -37,13 +35,12 @@ public class Motor {
         this.fechaPublicacion = new Date();
     }
 
-    public Motor(String marca, String modelo, double precio, int kilometraje, String descripcion, boolean envioDisponible, List<String> imagenes) {
+    public Motor(String marca, String modelo, double precio, int kilometraje, String descripcion, List<String> imagenes) {
         this.marca = marca;
         this.modelo = modelo;
         this.precio = precio;
         this.kilometraje = kilometraje;
         this.descripcion = descripcion;
-        this.envioDisponible = envioDisponible;
         this.imagenes = imagenes;
         this.fechaPublicacion = new Date();
     }
@@ -88,13 +85,6 @@ public class Motor {
     }
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public boolean isEnvioDisponible() {
-        return this.envioDisponible;
-    }
-    public void setEnvioDisponible(boolean envioDisponible) {
-        this.envioDisponible = envioDisponible;
     }
 
     public Date getFechaPublicacion() {
