@@ -3,6 +3,7 @@ package com.simplyswap.Models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -20,25 +21,47 @@ public class Tecnologia {
     private String descripcion;
     @Column(nullable = false)
     private boolean envioDisponible;
-
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
     @ElementCollection
     @CollectionTable(name = "producto_imagenes", joinColumns = @JoinColumn(name = "producto_id"))
     @Column(name = "imagen_url")
     private List<String> imagenes;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false, updatable = false)
+    private Date fechaPublicacion;
     public Tecnologia() {
 
     }
 
-    public Tecnologia(String nombre, double precio, int categoria, String descripcion, List<String> imagenes, boolean envioDisponible) {
+    public Tecnologia(String nombre,Date fechaPublicacion,Usuario usuario, double precio, int categoria, String descripcion, List<String> imagenes, boolean envioDisponible) {
         this.nombre = nombre;
         this.precio = precio;
+        this.fechaPublicacion = fechaPublicacion;
+        this.usuario = usuario;
         this.categoria = categoria;
         this.descripcion = descripcion;
         this.imagenes = imagenes;
         this.envioDisponible = envioDisponible;
     }
 
+    public Date getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(Date fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     public Long getId() {
         return this.id;

@@ -1,8 +1,10 @@
 'use client';
 import React, { useState } from 'react';
 import styles from './Libro.module.css';
+import { useRouter } from 'next/router';
 
 const Libro = ({
+  id,
   nombre,
   precio,
   descripcion,
@@ -13,6 +15,7 @@ const Libro = ({
   paginas,
   idioma
 }) => {
+  const router = useRouter();
   const [imagenIndex, setImagenIndex] = useState(0);
   const añoPublicacion = new Date(fechaPublicacion).getFullYear();
   const [mostrarMas, setMostrarMas] = useState(false);
@@ -27,9 +30,11 @@ const Libro = ({
   const anteriorImagen = () => {
     setImagenIndex((prev) => (prev > 0 ? prev - 1 : imagenes.length - 1));
   };
-
+  const handleClick = () => {
+    router.push(`/libro/${id}`);
+  };
   return (
-    <div className={styles.producto}>
+    <div className={styles.producto} onClick={handleClick}>
       <div className={styles['imagen-container']}>
         <img
           src={imagenes[imagenIndex]}

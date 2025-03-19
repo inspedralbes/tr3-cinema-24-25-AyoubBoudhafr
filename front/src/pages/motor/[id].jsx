@@ -1,39 +1,37 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import {getUnInmueble} from '../../services/comunicationManager'
+import { getMotor } from '../../services/comunicationManager'
+import styles from '../../styles/MotorDetalles.module.css'
 
-const InmuebleDetalles = () => {
-  const router = useRouter();
-  const { id } = router.query; 
-  const [motor, setInmueble] = useState(null);
+const MotorDetalles = () => {
+    const router = useRouter();
+    const { id } = router.query;
+    const [motor, setMotor] = useState(null);
 
-  useEffect(() => {
-    if (id) {
-      const fetchInmueble = async () => {
-        try {
-          const data = await getUnInmueble(id);
-          setInmueble(data);
-        } catch (error) {
-          console.error('Error al obtener el inmueble:', error);
+    useEffect(() => {
+        if (id) {
+            const fetchMotor = async () => {
+                try {
+                    const data = await getMotor(id);
+                    console.log('datos MotorDetalles',data);
+                    setMotor(data);
+                } catch (error) {
+                    console.error('Error al obtener el motor:', error);
+                }
+            };
+            fetchMotor();
         }
-      };
+    }, [id]);
 
-      fetchInmueble();
+    if (!motor) {
+        return <div>Cargando...</div>;
     }
-  }, [id]); 
 
-  if (!inmueble) {
-    return <div>Cargando...</div>;
-  }
-
-  return (
-    <div>
-      <h1>{inmueble.descripcionShort}</h1>
-      <p>{inmueble.descripcion}</p>
-      <p>{inmueble.direccion}</p>
-      <p>{inmueble.ciudad}, {inmueble.pais}</p>
-    </div>
-  );
+    return (
+        <div>
+            <p>{motor.precio}</p>
+        </div>
+    );
 };
 
-export default InmuebleDetalles;
+export default MotorDetalles;

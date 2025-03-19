@@ -22,6 +22,10 @@ public class Motor {
     private int kilometraje;
     private String descripcion;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, updatable = false)
     private Date fechaPublicacion;
@@ -35,14 +39,23 @@ public class Motor {
         this.fechaPublicacion = new Date();
     }
 
-    public Motor(String marca, String modelo, double precio, int kilometraje, String descripcion, List<String> imagenes) {
+    public Motor(String marca, Usuario usuario, String modelo, double precio, int kilometraje, String descripcion, List<String> imagenes) {
         this.marca = marca;
         this.modelo = modelo;
+        this.usuario = usuario;
         this.precio = precio;
         this.kilometraje = kilometraje;
         this.descripcion = descripcion;
         this.imagenes = imagenes;
         this.fechaPublicacion = new Date();
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Long getId() {

@@ -1,8 +1,13 @@
-    INSERT INTO inmueble (descripcion_short, descripcion, direccion, ciudad, pais, precio)
+    INSERT INTO usuarios (nombre, email, password, telefono, ciudad, pais, foto_perfil)
     VALUES 
-    ('Hermoso apartamento', 'Apartamento de lujo con vista al mar', 'Av. Principal 123', 'Barcelona', 'España',650000),
-    ('Casa acogedora', 'Casa con amplio jardín y piscina', 'Av. Diagonal 456', 'Madrid', 'España',199000),
-    ('JUAN', 'Casa con amplio jardín y piscina', 'Av. Diagonal 456', 'Madrid', 'España',199000);
+    ('Juan Pérez', 'juanperez@example.com', 'password123', '123456789', 'Madrid', 'España', '/assets/juan.webp'),
+    ('María García', 'maria@example.com', 'pass456', '987654321', 'Barcelona', 'España', '/assets/maria.webp');
+
+    INSERT INTO inmueble (descripcion_short, descripcion, direccion, ciudad, pais, precio,fecha_publicacion,usuario_id)
+    VALUES 
+    ('Hermoso apartamento', 'Apartamento de lujo con vista al mar', 'Av. Principal 123', 'Barcelona', 'España',650000,NOW(),1),
+    ('Casa acogedora', 'Casa con amplio jardín y piscina', 'Av. Diagonal 456', 'Madrid', 'España',199000,NOW(),1),
+    ('JUAN', 'Casa con amplio jardín y piscina', 'Av. Diagonal 456', 'Madrid', 'España',199000,NOW(),1);
 
     INSERT INTO inmueble_imagenes (inmueble_id, imagen_url)
     VALUES 
@@ -16,15 +21,12 @@
     (2, '/assets/casaAcojedora3.webp'),
     (2, '/assets/casaAcojedora4.webp'),
     (2, '/assets/casaAcojedora5.webp'),
-    (2, '/assets/casaAcojedora6.webp'),
-    (3, '/assets/JUAN1.webp'),
-    (3, '/assets/casaAcojedora6.webp'),
-    (3, '/assets/casaAcojedora6.webp');
+    (2, '/assets/casaAcojedora6.webp');
 
-    INSERT INTO libro (precio, nombre, autor, descripcion, fecha_publicacion, entrega_disponible)
+    INSERT INTO libro (precio, nombre, autor, descripcion, fecha_publicacion, entrega_disponible,fecha_publicacion_producto,usuario_id)
     VALUES 
-    (15.99, 'El principito', 'Juan Lopez', 'Libro clásico de Antoine de Saint-Exupéry', '1943-04-06', TRUE),
-    (25.50, '1984', 'Jose Fernandez', 'Novela distópica de George Orwell', '1949-06-08', FALSE);
+    (15.99, 'El principito', 'Juan Lopez', 'Libro clásico de Antoine de Saint-Exupéry', '1943-04-06', TRUE,NOW(),1),
+    (25.50, '1984', 'Jose Fernandez', 'Novela distópica de George Orwell', '1949-06-08', FALSE,NOW(),1);
 
     INSERT INTO libro_imagenes (libro_id, imagen_url)
     VALUES 
@@ -33,10 +35,10 @@
     (2, '/assets/1984.webp'),
     (2, '/assets/1984_2.webp');
 
-    INSERT INTO motor (marca, modelo, precio, kilometraje, descripcion, fecha_publicacion)
+    INSERT INTO motor (marca, modelo, precio, kilometraje, descripcion, fecha_publicacion,usuario_id)
     VALUES 
-    ('Toyota', 'Corolla', 12000, 50000, 'Toyota Corolla en excelente estado', NOW()),
-    ('Honda', 'Civic', 15000, 30000, 'Honda Civic 2020, poco uso', NOW());
+    ('Toyota', 'Corolla', 12000, 50000, 'Toyota Corolla en excelente estado', NOW(),1),
+    ('Honda', 'Civic', 15000, 30000, 'Honda Civic 2020, poco uso', NOW(),1);
 
     INSERT INTO motor_imagenes (motor_id, imagen_url)
     VALUES 
@@ -55,24 +57,19 @@
     (2, '/assets/honda_civic7.webp'),
     (2, '/assets/honda_civic8.webp');
 
-    INSERT INTO usuarios (nombre, email, password, telefono, ciudad, pais, foto_perfil)
-    VALUES 
-    ('Juan Pérez', 'juanperez@example.com', 'password123', '123456789', 'Madrid', 'España', '/assets/juan.webp'),
-    ('María García', 'maria@example.com', 'pass456', '987654321', 'Barcelona', 'España', '/assets/maria.webp');
 
-
-    INSERT INTO tecnologia (id, nombre, precio, categoria, descripcion, envio_disponible)
+    INSERT INTO tecnologia (id, nombre, precio, categoria, descripcion, envio_disponible, usuario_id, fecha_publicacion)
     VALUES 
-    (1, 'iPhone 13', 799, 1, 'iPhone 13 en excelente estado', TRUE),
-    (2, 'Samsung Galaxy S21', 699, 1, 'Samsung Galaxy S21 con caja y accesorios', FALSE),
-    (3, 'MacBook Pro 16', 2000, 1, 'MacBook Pro con chip M1 Pro', TRUE),
-    (4, 'iPad Air 4', 599, 1, 'iPad Air 4ta generación con chip A14 Bionic', TRUE),
-    (5, 'Google Pixel 6', 599, 1, 'Google Pixel 6 con cámara de 50MP', FALSE),
-    (6, 'Sony PlayStation 5', 499, 1, 'PlayStation 5 con soporte para 4K y ray tracing', TRUE),
-    (7, 'Xbox Series X', 499, 1, 'Xbox Series X con SSD ultrarrápido', TRUE),
-    (8, 'Dell XPS 13', 1299, 1, 'Ultrabook Dell XPS 13 con pantalla táctil', TRUE),
-    (9, 'Apple Watch Series 7', 399, 1, 'Apple Watch con pantalla Retina Always-On', FALSE),
-    (10, 'AirPods Pro', 249, 1, 'Auriculares inalámbricos con cancelación de ruido', TRUE);
+    (1, 'iPhone 13', 799, 1, 'iPhone 13 en excelente estado', TRUE,1,NOW()),
+    (2, 'Samsung Galaxy S21', 699, 1, 'Samsung Galaxy S21 con caja y accesorios', FALSE,1,NOW()),
+    (3, 'MacBook Pro 16', 2000, 1, 'MacBook Pro con chip M1 Pro', TRUE,1,NOW()),
+    (4, 'iPad Air 4', 599, 1, 'iPad Air 4ta generación con chip A14 Bionic', TRUE,1,NOW()),
+    (5, 'Google Pixel 6', 599, 1, 'Google Pixel 6 con cámara de 50MP', FALSE,1,NOW()),
+    (6, 'Sony PlayStation 5', 499, 1, 'PlayStation 5 con soporte para 4K y ray tracing', TRUE,1,NOW()),
+    (7, 'Xbox Series X', 499, 1, 'Xbox Series X con SSD ultrarrápido', TRUE,1,NOW()),
+    (8, 'Dell XPS 13', 1299, 1, 'Ultrabook Dell XPS 13 con pantalla táctil', TRUE,1,NOW()),
+    (9, 'Apple Watch Series 7', 399, 1, 'Apple Watch con pantalla Retina Always-On', FALSE,1,NOW()),
+    (10, 'AirPods Pro', 249, 1, 'Auriculares inalámbricos con cancelación de ruido', TRUE,1,NOW());
 
     INSERT INTO producto_imagenes (producto_id, imagen_url)
     VALUES 

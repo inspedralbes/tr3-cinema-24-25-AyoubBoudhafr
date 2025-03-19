@@ -11,6 +11,14 @@
 
 .producto:hover{
   transform: scale(1.05);
+  cursor: pointer;
+}
+
+.envioIcono {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  margin-right: 6px;
 }
 
 .imagen-container {
@@ -73,6 +81,8 @@
 .envio-info span {
   font-size: 14px;
   font-weight: 500;
+  display: flex;
+  align-items: center; 
 }
 .disponible{
   color: rgb(7, 115, 7);

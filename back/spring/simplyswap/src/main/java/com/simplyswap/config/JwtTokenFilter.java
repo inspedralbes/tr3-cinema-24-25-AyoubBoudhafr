@@ -20,7 +20,7 @@ import java.util.List;
 public class JwtTokenFilter extends OncePerRequestFilter {
     private static final Key SECRET_KEY = Keys.hmacShaKeyFor("mi-clave-secreta-super-segura-1234567890$$$".getBytes());
     private static final List<String> PRIVATE_PATHS = List.of(
-            "/api/usuario"
+            //"/api/usuario"
     );
 
     @Override

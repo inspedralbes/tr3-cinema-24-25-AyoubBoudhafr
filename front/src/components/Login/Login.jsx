@@ -23,7 +23,7 @@ const Login = () => {
     try {
       const response = await login({ username, password });
       if (response.success) {
-        router.push('/dashboard'); // Redirige a dashboard u otra página
+        router.push('/dashboard');
       } else {
         setError(response.message || 'Invalid credentials');
       }

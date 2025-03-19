@@ -1,39 +1,38 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import {getUnInmueble} from '../../services/comunicationManager'
+import {getUnLibro} from '../../services/comunicationManager'
+import styles from '../../styles/LibroDetalles.module.css'
 
-const InmuebleDetalles = () => {
+const LibroDetalles = () => {
   const router = useRouter();
   const { id } = router.query;
-  const [inmueble, setInmueble] = useState(null);
+  const [libro, setLibro] = useState(null);
 
   useEffect(() => {
     if (id) {
-      const fetchInmueble = async () => {
+      const fetchLibro = async () => {
         try {
-          const data = await getUnInmueble(id);
-          setInmueble(data);
+          const data = await getUnLibro(id);
+          console.log('datos LibroDetalles',data);
+          setLibro(data);
         } catch (error) {
-          console.error('Error al obtener el inmueble:', error);
+          console.error('Error al obtener el libro: ', error);
         }
       };
 
-      fetchInmueble();
+      fetchLibro();
     }
   }, [id]); 
 
-  if (!inmueble) {
+  if (!libro) {
     return <div>Cargando...</div>;
   }
 
   return (
     <div>
-      <h1>{inmueble.descripcionShort}</h1>
-      <p>{inmueble.descripcion}</p>
-      <p>{inmueble.direccion}</p>
-      <p>{inmueble.ciudad}, {inmueble.pais}</p>
+      <h1>{libro.nombre}</h1>
     </div>
   );
 };
 
-export default InmuebleDetalles;
+export default LibroDetalles;

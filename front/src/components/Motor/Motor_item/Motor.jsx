@@ -1,8 +1,10 @@
 'use client';
 import React, { useState } from 'react';
 import styles from './Motor.module.css';
+import { useRouter } from 'next/router';
 
 const Motor = ({
+  id,
   marca,
   modelo,
   precio,
@@ -10,6 +12,7 @@ const Motor = ({
   descripcion,
   imagenes
 }) => {
+  const router = useRouter();
   const [imagenIndex, setImagenIndex] = useState(0);
   
   const siguienteImagen = () => {
@@ -19,9 +22,11 @@ const Motor = ({
   const anteriorImagen = () => {
     setImagenIndex(prev => (prev > 0 ? prev - 1 : imagenes.length - 1));
   };
-
+  const handleClick = () => {
+    router.push(`/motor/${id}`);
+  };
   return (
-    <div className={styles.motor}>
+    <div className={styles.motor} onClick={handleClick}>
       <div className={styles['imagen-container']}>
         <img
           src={imagenes[imagenIndex]}

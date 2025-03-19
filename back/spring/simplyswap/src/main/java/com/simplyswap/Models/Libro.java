@@ -33,17 +33,43 @@ public class Libro {
     private Date fechaPublicacion;
     @Column(nullable = false)
     private boolean entregaDisponible;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false, updatable = false)
+    private Date fechaPublicacionProducto;
     public Libro(){
 
     }
-    public Libro(Long id, double precio, String nombre, String autor, String descripcion, Date fechaPublicacion, boolean entregaDisponible) {
+    public Libro(Long id, double precio, Date fechaPublicacionProducto, Usuario usuario, String nombre, String autor, String descripcion, Date fechaPublicacion, boolean entregaDisponible) {
         this.id = id;
         this.precio = precio;
         this.nombre = nombre;
+        this.fechaPublicacionProducto = fechaPublicacionProducto;
+        this.usuario = usuario;
         this.autor = autor;
         this.descripcion = descripcion;
         this.fechaPublicacion = fechaPublicacion;
         this.entregaDisponible = entregaDisponible;
+    }
+
+    public Date getFechaPublicacionProducto() {
+        return fechaPublicacionProducto;
+    }
+
+    public void setFechaPublicacionProducto(Date fechaPublicacionProducto) {
+        this.fechaPublicacionProducto = fechaPublicacionProducto;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getAutor() {
