@@ -1,7 +1,7 @@
     INSERT INTO usuarios (nombre, email, password, telefono, ciudad, pais, foto_perfil)
     VALUES 
-    ('Juan Pérez', 'juanperez@example.com', 'password123', '123456789', 'Madrid', 'España', '/assets/juan.webp'),
-    ('María García', 'maria@example.com', 'pass456', '987654321', 'Barcelona', 'España', '/assets/maria.webp');
+    ('Juan Pérez', 'juan@gmail.com', '$2a$10$3sFvB/9yzzsrBs.4ZDYm4erNtDVNXDaAMCKC9BHuP47/XnT7HzbiO', '123456789', 'Madrid', 'España', '/assets/juan.webp'),
+    ('Ayoub Boudhafri', 'admin@gmail.com', '$2a$10$3sFvB/9yzzsrBs.4ZDYm4erNtDVNXDaAMCKC9BHuP47/XnT7HzbiO', '987654321', 'Barcelona', 'España', '/assets/maria.webp');
 
     INSERT INTO inmueble (descripcion_short, descripcion, direccion, ciudad, pais, precio,fecha_publicacion,usuario_id)
     VALUES 

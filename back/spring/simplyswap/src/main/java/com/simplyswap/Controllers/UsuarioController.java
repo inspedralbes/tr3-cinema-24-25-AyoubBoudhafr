@@ -5,10 +5,9 @@ import com.simplyswap.Models.mensajeRespuesta;
 import com.simplyswap.Models.LoginResponse;
 import com.simplyswap.Repository.UserRepository;
 import com.simplyswap.Util.TokenUtil;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -17,6 +16,9 @@ public class UsuarioController {
 
     @Autowired
     private UserRepository usuarioRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping
     public List<Usuario> obtenerUsuarios() {
@@ -46,7 +48,7 @@ public class UsuarioController {
 
         usuarioExistente.setNombre(usuarioActualizado.getNombre());
         usuarioExistente.setEmail(usuarioActualizado.getEmail());
-        usuarioExistente.setPassword(usuarioActualizado.getPassword());
+        usuarioExistente.setPassword(passwordEncoder.encode(usuarioActualizado.getPassword()));
         usuarioExistente.setTelefono(usuarioActualizado.getTelefono());
         usuarioExistente.setCiudad(usuarioActualizado.getCiudad());
         usuarioExistente.setPais(usuarioActualizado.getPais());
@@ -66,11 +68,14 @@ public class UsuarioController {
         }
     }
 
+    // En UsuarioController.java (método register)
     @PostMapping("/register")
     public mensajeRespuesta register(@RequestBody Usuario usuario) {
         if (usuarioRepository.findByEmail(usuario.getEmail()) != null) {
             return new mensajeRespuesta("El email ya está en uso.", false);
         }
+
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 
         Usuario nuevoUsuario = new Usuario.Builder()
                 .setNombre(usuario.getNombre())
@@ -87,14 +92,16 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody Usuario usuario) {
-        Usuario user = usuarioRepository.findByEmail(usuario.getEmail());
+    public LoginResponse login(@RequestBody Usuario usuarioRequest) {
+        Usuario user = usuarioRepository.findByEmail(usuarioRequest.getEmail());
         if (user == null) {
             return new LoginResponse(false, "Usuario no encontrado.", null);
         }
-        if (!user.getPassword().equals(usuario.getPassword())) {
+
+        if (!passwordEncoder.matches(usuarioRequest.getPassword(), user.getPassword())) {
             return new LoginResponse(false, "Contraseña incorrecta.", null);
         }
+
         String token = TokenUtil.generateToken(user);
         return new LoginResponse(true, "Inicio de sesión exitoso.", token);
     }
