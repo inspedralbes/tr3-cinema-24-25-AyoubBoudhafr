@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { login } from '../../services/comunicationManager';
 import { useRouter } from 'next/navigation';
-import style from './Login.module.css';
+import styles from './Login.module.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -14,16 +14,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-    
     if (!username || !password) {
       setError('Both fields are required');
       return;
     }
-
     try {
       const response = await login({ username, password });
       if (response.success) {
-        router.push('/dashboard');
+        router.push('/');
       } else {
         setError(response.message || 'Invalid credentials');
       }
@@ -31,36 +29,39 @@ const Login = () => {
       setError('An error occurred, please try again');
     }
   };
-
+  const irRegister = () => {
+    router.push('register');
+  }
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <h1 className="login-title">Login</h1>
-        {error && <p className="login-error">{error}</p>}
+    <div className={styles['login-container']}>
+      <div className={styles['login-box']}>
+        <h1 className={styles['login-title']}>Login</h1>
+        {error && <p className={styles['login-error']}>{error}</p>}
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="username">Username</label>
+          <div className={styles['input-group']}>
+            <label htmlFor="username">Email</label>
             <input 
               type="text" 
               id="username" 
               value={username} 
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your username"
+              placeholder="introdueix l'email"
               required
             />
           </div>
-          <div className="input-group">
-            <label htmlFor="password">Password</label>
+          <div className={styles['input-group']}>
+            <label htmlFor="password">Contrasenya</label>
             <input 
               type="password" 
               id="password" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
+              placeholder="introdueix la contrasenya"
               required
             />
           </div>
-          <button type="submit" className="login-button">Log In</button>
+          <button type="submit" className={styles['login-button']}>Log In</button>
+          <button className={styles.irRegister} onClick={irRegister}>Registra't aquí</button>
         </form>
       </div>
     </div>

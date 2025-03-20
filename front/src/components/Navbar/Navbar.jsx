@@ -12,7 +12,7 @@ const Navbar = ({ busqueda, setBusqueda }) => {
         type="text"
         placeholder="Estic buscant..."
         value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
+        // onChange={(e) => setBusqueda(e.target.value)}
         className={styles['navbar-input']}
       />
       <div className={styles['navbar-icons']}>
