@@ -7,7 +7,8 @@ const Producto = ({ id,nombre, precio, imagenes, envioDisponible }) => {
 
   const [imagenIndex, setImagenIndex] = useState(0);
   const router = useRouter();
-  const siguienteImagen = () => {
+  const siguienteImagen = (e) => {
+    e.stopPropagation();
     if (imagenIndex < imagenes.length - 1) {
       setImagenIndex(imagenIndex + 1);
     } else {
@@ -15,7 +16,8 @@ const Producto = ({ id,nombre, precio, imagenes, envioDisponible }) => {
     }
   };
 
-  const anteriorImagen = () => {
+  const anteriorImagen = (e) => {
+    e.stopPropagation();
     if (imagenIndex > 0) {
       setImagenIndex(imagenIndex - 1);
     } else {

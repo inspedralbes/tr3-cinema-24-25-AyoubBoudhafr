@@ -84,7 +84,7 @@ export const login = async (credenciales) => {
     if(!response.ok){
       throw new Error('Error en la solicitud POST de login')
     }
-    const data = response.json();
+    const data = await response.json();
     return data;
   }catch(error){
     console.error('Error en fetch POST de login: ', error)
@@ -103,7 +103,7 @@ export const register = async (credenciales) => {
     if(!response.ok){
       throw new Error('Error en la solicitud POST de register')
     }
-    const data = response.json();
+    const data = await response.json();
     return data;
   }catch(error){
     console.error('Error en la solicitud POST de register: ',error);
@@ -133,7 +133,7 @@ export const getUnLibro = async (id) => {
     if(!response.ok){
       throw new Error('Error la solicitud GET de libro')
     }
-    const data = response.json();
+    const data = await response.json();
     return data;
   }catch(error){
     console.error('Error en el GET del libro',error);
@@ -146,7 +146,7 @@ export const getUnInmueble = async (id) =>{
     if(!response.ok){
       throw new Error('Error la solicitud GET de inmueble')
     }
-    const data = response.json();
+    const data = await response.json();
     return data;
   }catch(error){
     console.error('Error en la solicitud GET de inmueble: ',error);
@@ -159,7 +159,7 @@ export const getUnMotor = async (id) =>{
     if(!response.ok){
       throw new Error('Error la solicitud GET de motor')
     }
-    const data = response.json();
+    const data = await response.json();
     return data;
   }catch(error){
     console.error('Error en la solicitud GET de motor: ',error);
@@ -174,7 +174,7 @@ export const getUnaTecnologia = async (id) =>{
     if(!response.ok){
       throw new Error('Error la solicitud GET de motor')
     }
-    const data = response.json();
+    const data = await response.json();
     return data;
   }catch(error){
     console.error('Error en la solicitud GET de motor: ',error);

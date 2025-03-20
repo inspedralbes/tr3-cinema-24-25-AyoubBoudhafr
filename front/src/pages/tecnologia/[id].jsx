@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { getUnaTecnologia } from '../../services/comunicationManager'
-import styles from '../../styles/TecnologiaDetalles.module.css'
+import styles from '../../styles/Detalles.module.css'
 
 const TecnologiaDetalles = () => {
   const router = useRouter();
@@ -24,7 +24,18 @@ const TecnologiaDetalles = () => {
     }
   }, [id]);
 
-  if (!tecnologia) {
+  useEffect(() => {
+    if (tecnologia) {
+      setTimeout(() => {
+        window.scrollTo({
+          top: 100,
+          behavior: 'smooth',
+        });
+      }, 0); 
+    }
+  }, [tecnologia]);
+
+  if (!tecnologia ) {
     return <div>Cargando...</div>;
   }
 
@@ -88,7 +99,6 @@ const TecnologiaDetalles = () => {
         <p className={styles.descripcion}>{tecnologia.descripcion}</p>
         <p className={styles.fecha}>Publicado: {new Date(tecnologia.fechaPublicacion).toLocaleDateString()}</p>
 
-        {/* Botones de Comprar y Chat */}
         <div className={styles.botonesAccion}>
           <button className={styles.botonComprar}>
             Comprar

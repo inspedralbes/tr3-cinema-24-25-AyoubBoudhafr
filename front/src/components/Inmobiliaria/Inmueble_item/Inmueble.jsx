@@ -15,11 +15,13 @@ const Inmueble = ({
   const router = useRouter()
   const [imagenIndex, setImagenIndex] = useState(0);
 
-  const siguienteImagen = () => {
+  const siguienteImagen = (e) => {
+    e.stopPropagation();
     setImagenIndex((prev) => (prev < imagenes.length - 1 ? prev + 1 : 0));
   };
 
-  const anteriorImagen = () => {
+  const anteriorImagen = (e) => {
+    e.stopPropagation();
     setImagenIndex((prev) => (prev > 0 ? prev - 1 : imagenes.length - 1));
   };
   const handleClick = () => {
