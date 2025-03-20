@@ -1,70 +1,114 @@
 'use client';
 
 import { useState } from 'react';
-import { login } from '../../services/comunicationManager';
+import { register, login } from '../../services/comunicationManager';
 import { useRouter } from 'next/navigation';
-import style from './register.module.css';
+import styles from './Register.module.css';
 
-const Login = () => {
-  const [username, setUsername] = useState('');
+const Register = () => {
+  const [nombre, setNombre] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [telefono, setTelefono] = useState('');
   const [error, setError] = useState(null);
   const router = useRouter();
-
+  let credencialesRegister = {};
+  let credencialesLogin = {};
   const handleSubmit = async (e) => {
+    credencialesRegister = {
+      "nombre": nombre,
+      "email": email,
+      "password": password,
+      "telefono": telefono
+    }
+    credencialesLogin = {
+      "email": email,
+      "password": password
+    }
+    console.log('credencialesRegister', credencialesRegister);
+
     e.preventDefault();
     setError(null);
-    
-    if (!username || !password) {
-      setError('Both fields are required');
-      return;
-    }
-
     try {
-      const response = await login({ username, password });
-      if (response.success) {
-        router.push('/dashboard');
+      const response = await register(credencialesRegister);
+      console.log('respuesta de back', response);
+
+      if (response.exito) {
+        try {
+          const responseLogin = await login(credencialesLogin);
+          console.log('data login', responseLogin);
+          if (responseLogin.success) {
+            localStorage.setItem('token', response.token);
+            let token = localStorage.getItem('token');
+            router.push('/');
+          } else {
+            setError(response.message || 'Invalid credentials');
+          }
+        } catch (error) {
+          console.error('Error al hacer login', e);
+        }
       } else {
         setError(response.message || 'Invalid credentials');
       }
-    } catch (err) {
-      setError('An error occurred, please try again');
+    } catch (error) {
+      console.error('Error al hacer register', error);
+      setError('Error al hacer register');
+
     }
   };
-
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <h1 className="login-title">Login</h1>
-        {error && <p className="login-error">{error}</p>}
+    <div className={styles['login-container']}>
+      <div className={styles['login-box']}>
+        <h1 className={styles['login-title']}>Register</h1>
+        {error && <p className={styles['login-error']}>{error}</p>}
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="username">Username</label>
-            <input 
-              type="text" 
-              id="username" 
-              value={username} 
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your username"
+          <div className={styles['input-group']}>
+            <label htmlFor="nombre">Nombre</label>
+            <input
+              type="text"
+              id='nombre'
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+              placeholder='*Nom'
+            />
+          </div>
+          <div className={styles['input-group']}>
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="*Email"
               required
             />
           </div>
-          <div className="input-group">
-            <label htmlFor="password">Password</label>
-            <input 
-              type="password" 
-              id="password" 
-              value={password} 
+          <div className={styles['input-group']}>
+            <label htmlFor="password">Contrasenya</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
+              placeholder="*Contrasenya"
               required
             />
           </div>
-          <button type="submit" className="login-button">Log In</button>
+          <div className={styles['input-group']}>
+            <label htmlFor="telefon">Telèfon</label>
+            <input
+              type="telefono"
+              id="telefono"
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
+              placeholder="Num. Telèfon"
+            />
+          </div>
+          <button type="submit" className={styles['login-button']}>Register</button>
         </form>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;

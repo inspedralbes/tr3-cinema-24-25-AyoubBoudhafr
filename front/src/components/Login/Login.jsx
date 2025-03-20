@@ -6,21 +6,30 @@ import { useRouter } from 'next/navigation';
 import styles from './Login.module.css';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const router = useRouter();
-
+  let credenciales = {};
   const handleSubmit = async (e) => {
+    credenciales = {
+     "email": email,
+     "password": password
+    }
+    console.log('credenciales',credenciales);
+    
     e.preventDefault();
     setError(null);
-    if (!username || !password) {
+    if (!email || !password) {
       setError('Both fields are required');
       return;
     }
     try {
-      const response = await login({ username, password });
+      const response = await login( credenciales );
+      console.log('respuesta de back',response);
+      
       if (response.success) {
+        localStorage.setItem('token', response.token);
         router.push('/');
       } else {
         setError(response.message || 'Invalid credentials');
@@ -39,13 +48,13 @@ const Login = () => {
         {error && <p className={styles['login-error']}>{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className={styles['input-group']}>
-            <label htmlFor="username">Email</label>
+            <label htmlFor="email">Email</label>
             <input 
               type="text" 
-              id="username" 
-              value={username} 
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="introdueix l'email"
+              id="email" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
               required
             />
           </div>
@@ -56,7 +65,7 @@ const Login = () => {
               id="password" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="introdueix la contrasenya"
+              placeholder="Contrasenya"
               required
             />
           </div>
