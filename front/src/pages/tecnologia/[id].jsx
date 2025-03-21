@@ -38,7 +38,9 @@ const TecnologiaDetalles = () => {
   if (!tecnologia ) {
     return <div>Cargando...</div>;
   }
-
+  const irPago = () => {
+    router.push('/compra/formulario')
+  }
   const cambiarImagen = (direccion) => {
     const totalImagenes = tecnologia.imagenes.length;
     setImagenSeleccionada(prev =>
@@ -100,7 +102,7 @@ const TecnologiaDetalles = () => {
         <p className={styles.fecha}>Publicado: {new Date(tecnologia.fechaPublicacion).toLocaleDateString()}</p>
 
         <div className={styles.botonesAccion}>
-          <button className={styles.botonComprar}>
+          <button className={styles.botonComprar} onClick={irPago}>
             Comprar
           </button>
           <button className={styles.botonChat}>

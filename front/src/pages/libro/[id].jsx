@@ -40,6 +40,10 @@ const LibroDetalles = () => {
     return <div>Cargando...</div>;
   }
 
+  const irPago = () => {
+    router.push('/compra/pago')
+  }
+
   const cambiarImagen = (direccion) => {
     const totalImagenes = libro.imagenes.length;
     setImagenSeleccionada((prev) =>
@@ -108,7 +112,7 @@ const LibroDetalles = () => {
           {'\u20AC'}
         </p>
         <div className={styles.botonesAccion}>
-          <button className={styles.botonComprar}>
+          <button className={styles.botonComprar} onClick={irPago}>
             Comprar
           </button>
           <button className={styles.botonChat}>
