@@ -95,14 +95,14 @@ public class UsuarioController {
     public LoginResponse login(@RequestBody Usuario usuarioRequest) {
         Usuario user = usuarioRepository.findByEmail(usuarioRequest.getEmail());
         if (user == null) {
-            return new LoginResponse(false, "Usuario no encontrado.", null);
+            return new LoginResponse(false, "Usuario no encontrado.", null, null);
         }
 
         if (!passwordEncoder.matches(usuarioRequest.getPassword(), user.getPassword())) {
-            return new LoginResponse(false, "Contraseña incorrecta.", null);
+            return new LoginResponse(false, "Contraseña incorrecta.", null,null);
         }
 
         String token = TokenUtil.generateToken(user);
-        return new LoginResponse(true, "Inicio de sesión exitoso.", token);
+        return new LoginResponse(true, "Inicio de sesión exitoso.", token, user);
     }
 }

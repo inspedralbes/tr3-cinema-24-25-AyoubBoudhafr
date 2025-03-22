@@ -39,6 +39,7 @@ const TecnologiaDetalles = () => {
     return <div>Cargando...</div>;
   }
   const irPago = () => {
+    localStorage.setItem('producto', JSON.stringify(tecnologia));
     router.push('/compra/formulario')
   }
   const cambiarImagen = (direccion) => {

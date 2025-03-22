@@ -30,6 +30,7 @@ const Login = () => {
       
       if (response.success) {
         localStorage.setItem('token', response.token);
+        localStorage.setItem('usuario', JSON.stringify(response.user));
         router.push('/');
       } else {
         setError(response.message || 'Invalid credentials');

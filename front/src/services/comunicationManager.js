@@ -91,6 +91,22 @@ export const login = async (credenciales) => {
     return null;
   }
 }
+export const compra = async (datos) => {
+  try{
+    const response = await fetch(`${API_URL_SPRING}/transacciones`,{
+      method: 'POST',
+      headers:{
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(datos),
+    });
+    const data = await response.json();
+    return data;
+  }catch(error){
+    console.error('Error en fetch POST de compra: ', error)
+    return null;
+  }
+}
 export const register = async (credenciales) => {
   try{
     const response = await fetch(`${API_URL_SPRING}/usuario/register`,{

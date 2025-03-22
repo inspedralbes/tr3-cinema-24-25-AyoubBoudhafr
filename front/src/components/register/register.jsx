@@ -39,6 +39,7 @@ const Register = () => {
           console.log('data login', responseLogin);
           if (responseLogin.success) {
             localStorage.setItem('token', response.token);
+            localStorage.setItem('usuario', response.user);
             let token = localStorage.getItem('token');
             router.push('/');
           } else {

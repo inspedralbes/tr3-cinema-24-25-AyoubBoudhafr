@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import styles from './Navbar.module.css';  // Importación correcta de CSS Module
+import styles from './Navbar.module.css';  
 import { FaRegUser, FaRegHeart, FaRegCommentDots, FaPlusCircle } from 'react-icons/fa';
 
 const Navbar = ({ busqueda, setBusqueda }) => {

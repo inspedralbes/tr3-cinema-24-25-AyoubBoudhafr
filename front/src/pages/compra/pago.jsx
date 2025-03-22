@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../../styles/pago.module.css';
-
+import { compra } from '../../services/comunicationManager'
 const Pago = () => {
     const router = useRouter();
     const [cardData, setCardData] = useState({
@@ -31,9 +31,21 @@ const Pago = () => {
         e.preventDefault();
         if (validateCard()) {
             const userData = JSON.parse(localStorage.getItem('userData'));
+            const producto = JSON.parse(localStorage.getItem('producto'));
+            const categoriaCompra = localStorage.getItem('categoriaCompra');
+            const datosCompra = {
+                "nombre": producto.nombre,
+                "precioPagado": producto.precio,
+                "categoria": "Tecnologia",
+                "estado": "Preparando pedido",
+                "producto_id": 2,
+                "compradorId": 2,
+            }
+            const response = await compra(datosCompra);
+            console.log(response);
             localStorage.removeItem('userData');
             alert('Pago exitoso!');
-            router.push('/')
+            router.push('/');
         }
     };
 
