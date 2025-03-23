@@ -197,3 +197,18 @@ export const getUnaTecnologia = async (id) =>{
     return null;
   }
 }
+export const fetchUsuario = async (id) =>{
+  console.log(`${API_URL_SPRING}/tecnologia/${id}`);
+  
+  try{
+    const response = await fetch(`${API_URL_SPRING}/usuario/infoUser/${id}`);
+    if(!response.ok){
+      throw new Error('Error la solicitud GET de usuario')
+    }
+    const data = await response.json();
+    return data;
+  }catch(error){
+    console.error('Error en la solicitud GET de usuario: ',error);
+    return null;
+  }
+}

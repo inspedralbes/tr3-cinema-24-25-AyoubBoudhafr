@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./back/spring/simplyswap
+      dockerfile: Dockerfile
+    container_name: simplyswap-backend
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/simplyswap?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./back/spring/simplyswap:/app
+      - ~/.m2:/root/.m2
+    working_dir: /app
+    command: ["./mvnw", "spring-boot:run"]
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - simplyswap-network
+
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: simplyswap-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: ["npm", "run", "dev"]
+    depends_on:
+      - backend
+    networks:
+      - simplyswap-network
+
+  db:
+    image: mysql:8.0
+    container_name: simplyswap-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: simplyswap
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./back/simplyswap.sql:/docker-entrypoint-initdb.d/simplyswap.sql
+    networks:
+      - simplyswap-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
+
+  adminer:
+    image: adminer
+    container_name: simplyswap-adminer
+    restart: always
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+    networks:
+      - simplyswap-network
+
+networks:
+  simplyswap-network:
+    driver: bridge
+
+volumes:
+  db_data:

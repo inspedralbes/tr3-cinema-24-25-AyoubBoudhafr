@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../../styles/formulario.module.css';
 
@@ -9,7 +9,6 @@ const formularioPago = () => {
     email: '',
     address: ''
   });
-
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
@@ -41,7 +40,7 @@ const formularioPago = () => {
           <input
             type="text"
             value={userData.name}
-            onChange={(e) => setUserData({...userData, name: e.target.value})}
+            onChange={(e) => setUserData({ ...userData, name: e.target.value })}
             className={errors.name ? styles.error : ''}
           />
           {errors.name && <span className={styles.errorMsg}>{errors.name}</span>}
@@ -52,7 +51,7 @@ const formularioPago = () => {
           <input
             type="email"
             value={userData.email}
-            onChange={(e) => setUserData({...userData, email: e.target.value})}
+            onChange={(e) => setUserData({ ...userData, email: e.target.value })}
             className={errors.email ? styles.error : ''}
           />
           {errors.email && <span className={styles.errorMsg}>{errors.email}</span>}
@@ -63,7 +62,7 @@ const formularioPago = () => {
           <input
             type="text"
             value={userData.address}
-            onChange={(e) => setUserData({...userData, address: e.target.value})}
+            onChange={(e) => setUserData({ ...userData, address: e.target.value })}
             className={errors.address ? styles.error : ''}
           />
           {errors.address && <span className={styles.errorMsg}>{errors.address}</span>}

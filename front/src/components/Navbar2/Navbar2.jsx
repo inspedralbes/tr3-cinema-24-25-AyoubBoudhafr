@@ -12,7 +12,7 @@ const Navbar2 = () => {
           <FaCar className={styles['nav2-icon']} />
         </Link>
         <Link href="/motor">
-          <span>Motor</span>
+          <span>Vehículos</span>
         </Link>
       </div>
       <div className={styles['nav2-item']}>
@@ -20,7 +20,7 @@ const Navbar2 = () => {
           <FaBuilding className={styles['nav2-icon']} />
         </Link>
         <Link href="/inmobiliaria">
-          <span>Inmobiliaria</span>
+          <span>Propiedades</span>
         </Link>
       </div>
       <div className={styles['nav2-item']}>
@@ -28,7 +28,7 @@ const Navbar2 = () => {
           <FaBookOpen className={styles['nav2-icon']} />
         </Link>
         <Link href="/libro">
-          <span>Formación y libros</span>
+          <span>Libros</span>
         </Link>
       </div>
       <div className={styles['nav2-item']}>
@@ -36,7 +36,7 @@ const Navbar2 = () => {
           <FaLaptop className={styles['nav2-icon']} />
         </Link>
         <Link href="/tecnologia">
-          <span>Tecnología</span>
+          <span>Electrónica</span>
         </Link>
       </div>
     </nav>

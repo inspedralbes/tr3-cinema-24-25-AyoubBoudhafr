@@ -11,10 +11,18 @@ const Pago = () => {
     });
 
     const [errors, setErrors] = useState({});
-
+    if(localStorage.getItem('usuario') == null){
+        router.push('/')
+      }
     useEffect(() => {
         const savedData = localStorage.getItem('userData');
-        if (!savedData) router.push('/compra/formulario');
+        if (!savedData){
+            router.push('/compra/formulario');
+        }
+        const savedUser = localStorage.getItem('usuario');
+        if(!savedUser){
+            router.push('/')
+          }
     }, []);
 
     const validateCard = () => {
@@ -31,15 +39,17 @@ const Pago = () => {
         e.preventDefault();
         if (validateCard()) {
             const userData = JSON.parse(localStorage.getItem('userData'));
+            console.log(userData);
+            const usuarioActual = JSON.parse(localStorage.getItem('usuario'));
             const producto = JSON.parse(localStorage.getItem('producto'));
-            const categoriaCompra = localStorage.getItem('categoriaCompra');
+            const categoriaCompra = localStorage.getItem('categoria');
             const datosCompra = {
                 "nombre": producto.nombre,
                 "precioPagado": producto.precio,
-                "categoria": "Tecnologia",
+                "categoria": categoriaCompra,
                 "estado": "Preparando pedido",
-                "producto_id": 2,
-                "compradorId": 2,
+                "producto_id": producto.id,
+                "compradorId": usuarioActual.id,
             }
             const response = await compra(datosCompra);
             console.log(response);

@@ -2,12 +2,18 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './Navbar.module.css';  
+import { useRouter } from 'next/navigation';
 import { FaRegUser, FaRegHeart, FaRegCommentDots, FaPlusCircle } from 'react-icons/fa';
 
 const Navbar = ({ busqueda, setBusqueda }) => {
+  const router = useRouter();
+
+  const toLanding = () => {
+    router.push('/');
+  }
   return (
     <nav className={styles.navbar}>
-      <h1 className={styles['navbar-title']}>SimplySwap</h1>
+      <h1 className={styles['navbar-title']} onClick={toLanding}>SimplySwap</h1>
       <input
         type="text"
         placeholder="Estic buscant..."

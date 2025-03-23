@@ -20,12 +20,12 @@ public class UsuarioController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping
+    @GetMapping("/infoUsers")
     public List<Usuario> obtenerUsuarios() {
         return usuarioRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/infoUser/{id}")
     public Usuario obtenerUsuarioPorId(@PathVariable Long id) {
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
@@ -68,7 +68,6 @@ public class UsuarioController {
         }
     }
 
-    // En UsuarioController.java (método register)
     @PostMapping("/register")
     public mensajeRespuesta register(@RequestBody Usuario usuario) {
         if (usuarioRepository.findByEmail(usuario.getEmail()) != null) {

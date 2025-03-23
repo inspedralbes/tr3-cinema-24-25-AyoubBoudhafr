@@ -41,7 +41,14 @@ const LibroDetalles = () => {
   }
 
   const irPago = () => {
-    router.push('/compra/pago')
+    const savedUser = localStorage.getItem('usuario');
+    if (!savedUser) {
+      alert('Necesitas iniciar sesion para comprar');
+    }else{
+      localStorage.setItem('categoria', 'libro');
+      localStorage.setItem('producto', JSON.stringify(libro));
+      router.push('/compra/formulario')
+    }
   }
 
   const cambiarImagen = (direccion) => {
