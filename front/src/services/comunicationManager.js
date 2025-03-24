@@ -72,25 +72,27 @@ export const getMotor = async () => {
     return null;
   }
 };
-export const login = async (credenciales) => {
-  try{
-    const response = await fetch(`${API_URL_SPRING}/usuario/login`,{
+export const login = async (credentials) => {
+  try {
+    const response = await fetch(`${API_URL_SPRING}/usuario/login`, {
       method: 'POST',
-      headers:{
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(credenciales),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(credentials),
     });
-    if(!response.ok){
-      throw new Error('Error en la solicitud POST de login')
+
+    if (!response.ok) {
+      throw new Error('Error en la respuesta del servidor');
     }
+
     const data = await response.json();
+    console.log('Respuesta del login:', data);
     return data;
-  }catch(error){
-    console.error('Error en fetch POST de login: ', error)
-    return null;
+  } catch (error) {
+    console.error('Error en login:', error);
+    return { success: false, message: 'Error en el login' };
   }
-}
+};
+
 export const compra = async (datos) => {
   try{
     const response = await fetch(`${API_URL_SPRING}/transacciones`,{
@@ -197,18 +199,22 @@ export const getUnaTecnologia = async (id) =>{
     return null;
   }
 }
-export const fetchUsuario = async (id) =>{
-  console.log(`${API_URL_SPRING}/tecnologia/${id}`);
-  
-  try{
-    const response = await fetch(`${API_URL_SPRING}/usuario/infoUser/${id}`);
-    if(!response.ok){
-      throw new Error('Error la solicitud GET de usuario')
+export const fetchUsuario = async (id, token) => {
+  try {
+    const response = await fetch(`${API_URL_SPRING}/usuario/infoUser/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    if (!response.ok) {
+      throw new Error('Error en la solicitud GET de usuario');
     }
     const data = await response.json();
     return data;
-  }catch(error){
-    console.error('Error en la solicitud GET de usuario: ',error);
+  } catch (error) {
+    console.error('Error en la solicitud GET de usuario: ', error);
     return null;
   }
 }

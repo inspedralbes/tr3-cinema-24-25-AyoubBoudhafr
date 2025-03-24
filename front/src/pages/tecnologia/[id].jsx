@@ -1,20 +1,21 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { getUnaTecnologia } from '../../services/comunicationManager'
-import styles from '../../styles/Detalles.module.css'
+import { getUnaTecnologia } from '../../services/comunicationManager';
+import styles from '../../styles/Detalles.module.css';
+import Chat from '../../components/Chat/Chat';
 
 const TecnologiaDetalles = () => {
   const router = useRouter();
   const { id } = router.query;
   const [tecnologia, setTecnologia] = useState(null);
   const [imagenSeleccionada, setImagenSeleccionada] = useState(0);
+  const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
     if (id) {
       const fetchTecnologia = async () => {
         try {
           const data = await getUnaTecnologia(id);
-          console.log(data);
           setTecnologia(data);
         } catch (error) {
           console.error('Error al obtener el producto:', error);
@@ -26,34 +27,31 @@ const TecnologiaDetalles = () => {
 
   useEffect(() => {
     if (tecnologia) {
-      setTimeout(() => {
-        window.scrollTo({
-          top: 100,
-          behavior: 'smooth',
-        });
-      }, 0); 
+      window.scrollTo({ top: 100, behavior: 'smooth' });
     }
   }, [tecnologia]);
 
-  if (!tecnologia ) {
-    return <div>Cargando...</div>;
-  }
   const irPago = () => {
     const savedUser = localStorage.getItem('usuario');
     if (!savedUser) {
-      alert('Necesitas iniciar sesion para comprar');
-    }else{
+      alert('Necesitas iniciar sesión para comprar');
+    } else {
       localStorage.setItem('categoria', "tecnologia");
       localStorage.setItem('producto', JSON.stringify(tecnologia));
-      router.push('/compra/formulario')
+      router.push('/compra/formulario');
     }
-  }
+  };
+
   const cambiarImagen = (direccion) => {
     const totalImagenes = tecnologia.imagenes.length;
     setImagenSeleccionada(prev =>
       direccion === 'next' ? (prev + 1) % totalImagenes : (prev - 1 + totalImagenes) % totalImagenes
     );
   };
+
+  if (!tecnologia) {
+    return <div className={styles.loading}>Cargando...</div>;
+  }
 
   return (
     <div className={styles.productoDetalle}>
@@ -104,19 +102,23 @@ const TecnologiaDetalles = () => {
         </div>
 
         <h1 className={styles.nombre}>{tecnologia.nombre}</h1>
-        <p className={styles.precio}>{tecnologia.precio} {'\u20AC'}</p>
+        <p className={styles.precio}>{tecnologia.precio} €</p>
         <p className={styles.descripcion}>{tecnologia.descripcion}</p>
-        <p className={styles.fecha}>Publicado: {new Date(tecnologia.fechaPublicacion).toLocaleDateString()}</p>
+        <p className={styles.fecha}>
+          Publicado: {new Date(tecnologia.fechaPublicacion).toLocaleDateString()}
+        </p>
 
         <div className={styles.botonesAccion}>
           <button className={styles.botonComprar} onClick={irPago}>
             Comprar
           </button>
-          <button className={styles.botonChat}>
-            Chat
+          <button className={styles.botonChat} onClick={() => setShowChat(!showChat)}>
+            {showChat ? 'Cerrar Chat' : 'Abrir Chat'}
           </button>
         </div>
       </div>
+
+      {showChat && <Chat productoId={id} onClose={() => setShowChat(false) } />}
     </div>
   );
 };

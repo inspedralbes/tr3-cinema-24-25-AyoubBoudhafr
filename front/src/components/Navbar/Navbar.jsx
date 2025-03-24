@@ -28,7 +28,7 @@ const Navbar = ({ busqueda, setBusqueda }) => {
         <Link href="/chats">
           <FaRegCommentDots className={styles['navbar-icon']} />
         </Link>
-        <Link href="/login">
+        <Link href="/perfil">
           <FaRegUser className={styles['navbar-icon']} />
         </Link>
         <Link href="/vendre">

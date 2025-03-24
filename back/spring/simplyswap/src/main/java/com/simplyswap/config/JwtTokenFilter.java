@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -24,13 +25,16 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             "/api/usuario/infoUsers/**"
     );
 
+    private AntPathMatcher pathMatcher = new AntPathMatcher();
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
         String path = request.getRequestURI();
+        boolean isProtected = PRIVATE_PATHS.stream().anyMatch(pattern -> pathMatcher.match(pattern, path));
 
-        if (!PRIVATE_PATHS.contains(path)) {
+        if (!isProtected) {
             filterChain.doFilter(request, response);
             return;
         }

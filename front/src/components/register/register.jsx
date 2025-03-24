@@ -12,51 +12,43 @@ const Register = () => {
   const [telefono, setTelefono] = useState('');
   const [error, setError] = useState(null);
   const router = useRouter();
-  let credencialesRegister = {};
-  let credencialesLogin = {};
   const handleSubmit = async (e) => {
-    credencialesRegister = {
-      "nombre": nombre,
-      "email": email,
-      "password": password,
-      "telefono": telefono
-    }
-    credencialesLogin = {
-      "email": email,
-      "password": password
-    }
-    console.log('credencialesRegister', credencialesRegister);
-
     e.preventDefault();
     setError(null);
+
+    const credencialesRegister = {
+      nombre: nombre,
+      email: email,
+      password: password,
+      telefono: telefono
+    };
+
+    const credencialesLogin = {
+      email: email,
+      password: password
+    };
+
+    console.log('credencialesRegister', credencialesRegister);
+
     try {
       const response = await register(credencialesRegister);
       console.log('respuesta de back', response);
 
-      if (response.exito) {
-        try {
-          const responseLogin = await login(credencialesLogin);
-          console.log('data login', responseLogin);
-          if (responseLogin.success) {
-            localStorage.setItem('token', response.token);
-            localStorage.setItem('usuario', response.user);
-            let token = localStorage.getItem('token');
-            router.push('/');
-          } else {
-            setError(response.message || 'Invalid credentials');
-          }
-        } catch (error) {
-          console.error('Error al hacer login', e);
-        }
-      } else {
-        setError(response.message || 'Invalid credentials');
-      }
+      const responseLogin = await login(credencialesLogin);
+      console.log('data login', responseLogin);
+      console.log('token:', responseLogin.token, 'usuario:', responseLogin.user);
+
+      localStorage.setItem('token', responseLogin.token);
+      localStorage.setItem('usuario', JSON.stringify(responseLogin.user));
+      router.push('/');
+      
     } catch (error) {
       console.error('Error al hacer register', error);
       setError('Error al hacer register');
-
     }
   };
+
+
   return (
     <div className={styles['login-container']}>
       <div className={styles['login-box']}>

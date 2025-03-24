@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../../styles/pago.module.css';
 import { compra } from '../../services/comunicationManager'
+import { toast, Toaster } from 'react-hot-toast';
 const Pago = () => {
     const router = useRouter();
     const [cardData, setCardData] = useState({
@@ -9,12 +10,17 @@ const Pago = () => {
         expiry: '',
         cvc: ''
     });
-
+    const showToast = (mensaje) => {
+        toast.success(mensaje, {
+          duration: 4000, // Duración en ms
+          position: 'top-right', // Posición del toast
+        });
+      };
     const [errors, setErrors] = useState({});
-    if(localStorage.getItem('usuario') == null){
-        router.push('/')
-      }
     useEffect(() => {
+        if(localStorage.getItem('usuario') == null){
+            router.push('/')
+          }
         const savedData = localStorage.getItem('userData');
         if (!savedData){
             router.push('/compra/formulario');
@@ -54,7 +60,7 @@ const Pago = () => {
             const response = await compra(datosCompra);
             console.log(response);
             localStorage.removeItem('userData');
-            alert('Pago exitoso!');
+            showToast('Pago exitoso!');
             router.push('/');
         }
     };
