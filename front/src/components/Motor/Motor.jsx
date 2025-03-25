@@ -1,33 +1,65 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Motor from './Motor_item/Motor';
 import { getMotor } from '../../services/comunicationManager';
 import styles from './Motor.module.css';
 
 const Motores = ({ busqueda }) => {
   const [motores, setMotores] = useState([]);
+  const [paginaActual, setPaginaActual] = useState(0);
+  const [hayMasPaginas, setHayMasPaginas] = useState(true);
+  const [cargando, setCargando] = useState(false);
+  const TAMANO_PAGINA = 1;
 
   useEffect(() => {
-    const cargarMotores = async () => {
-      const datos = await getMotor();
-      setMotores(datos);
+    const fetchMotores = async () => {
+      setCargando(true);
+      try {
+        const nuevosMotores = await getMotor(paginaActual, TAMANO_PAGINA);
+        setMotores(nuevosMotores);
+        setHayMasPaginas(nuevosMotores.length === TAMANO_PAGINA);
+      } catch (error) {
+        console.error('Error cargando motores:', error);
+      } finally {
+        setCargando(false);
+      }
     };
-    cargarMotores();
-  }, []);
-  
+    fetchMotores();
+  }, [paginaActual]);
+
   const motoresFiltrados = motores.filter(motor =>
-    motor.marca.toLowerCase().includes(busqueda.toLowerCase())
+    motor.marca?.toLowerCase().includes(busqueda?.toLowerCase() || '')
   );
 
   return (
     <div className={styles.contenedor}>
-      {motoresFiltrados.length > 0 ? (
-        motoresFiltrados.map((motor) => (
+      <div className={styles.lista}>
+        {motoresFiltrados.map((motor) => (
           <Motor key={motor.id} {...motor} />
-        ))
-      ) : (
-        <p className={styles.sinResultados}>🚗 No se encontraron vehículos</p>
-      )}
+        ))}
+      </div>
+
+      <div className={styles.controles}>
+        <button
+          onClick={() => setPaginaActual(p => Math.max(0, p - 1))}
+          disabled={paginaActual === 0 || cargando}
+          className={styles.flecha}
+        >
+          ◀
+        </button>
+
+        <span className={styles.paginaActual}>Página {paginaActual + 1}</span>
+
+        <button
+          onClick={() => setPaginaActual(p => p + 1)}
+          disabled={!hayMasPaginas || cargando}
+          className={styles.flecha}
+        >
+          ▶
+        </button>
+      </div>
+
+      {cargando && <div className={styles.cargando}>Cargando...</div>}
     </div>
   );
 };

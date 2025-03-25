@@ -15,7 +15,7 @@
 .motor:hover {
   transform: scale(1.02);
   cursor: pointer;
-}
+} 
   
   .imagen-container {
     position: relative;

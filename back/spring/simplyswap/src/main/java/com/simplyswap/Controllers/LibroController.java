@@ -4,6 +4,9 @@ import com.simplyswap.Models.Libro;
 import com.simplyswap.Models.mensajeRespuesta;
 import com.simplyswap.Repository.LibroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +19,13 @@ public class LibroController {
     private LibroRepository libroRepository;
 
     @GetMapping
-    public List<Libro> obtenerLibros() {
-        return libroRepository.findAll();
+    public List<Libro> obtenerLibros(
+            @RequestParam(defaultValue = "0") int pagina,
+            @RequestParam(defaultValue = "10") int tamaño) {
+
+        Pageable pageable = PageRequest.of(pagina, tamaño);
+        Page<Libro> paginaLibros = libroRepository.findAll(pageable);
+        return paginaLibros.getContent();
     }
 
     @GetMapping("/{id}")

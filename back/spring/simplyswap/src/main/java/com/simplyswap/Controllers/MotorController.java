@@ -4,6 +4,9 @@ import com.simplyswap.Models.Motor;
 import com.simplyswap.Models.mensajeRespuesta;
 import com.simplyswap.Repository.MotorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +19,13 @@ public class MotorController {
     private MotorRepository motorRepository;
 
     @GetMapping
-    public List<Motor> obtenerMotores() {
-        return motorRepository.findAll();
+    public List<Motor> obtenerMotores(
+            @RequestParam(defaultValue = "0") int pagina,
+            @RequestParam(defaultValue = "10") int tamaño) {
+
+        Pageable pageable = PageRequest.of(pagina, tamaño);
+        Page<Motor> paginaMotor = motorRepository.findAll(pageable);
+        return paginaMotor.getContent();
     }
 
     @GetMapping("/{id}")

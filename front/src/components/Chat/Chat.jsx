@@ -3,36 +3,64 @@ import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import styles from './Chat.module.css';
 
-const Chat = ({ productoId, onClose }) => {
+const Chat = ({ productoId, onClose, vendedor }) => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isDragging, setIsDragging] = useState(false);
-  const [position, setPosition] = useState({ x: 50, y: 50 });
+  const [position, setPosition] = useState({
+    x: typeof window !== 'undefined' ? window.innerWidth - 400 : 50,
+    y: typeof window !== 'undefined' ? window.innerHeight - 500 : 50
+  });
+
   const chatContainerRef = useRef(null);
   const stompClient = useRef(null);
   const dragStartPos = useRef({ x: 0, y: 0 });
-  const usuario = JSON.parse(localStorage.getItem('usuario'));
+
   useEffect(() => {
     const fetchMessages = async () => {
-      //const response = await fetch(`http://tu-api-spring/mensajes/${productoId}`);
-      //const data = await response.json();
-      //setMessages(data);
+      try {
+        const response = await fetch(`http://localhost:8080/api/mensajes/${productoId}`);
+
+        if (!response.ok) {
+          console.error('Respuesta no exitosa:', response.status);
+          setMessages([]);
+          return;
+        }
+
+        const result = await response.json();
+        const messagesData = Array.isArray(result) ? result : result?.content || [];
+
+        setMessages(messagesData.map(msg => ({
+          usuario: msg.sender || 'Desconocido',
+          contenido: msg.content || '',
+          fecha: msg.sentAt || new Date().toISOString()
+        })));
+
+      } catch (error) {
+        console.error('Error en la solicitud:', error);
+        setMessages([]);
+      }
     };
+
     fetchMessages();
   }, [productoId]);
 
   useEffect(() => {
-    const socket = new SockJS('http://tu-api-spring/ws');
+    const socket = new SockJS('http://localhost:8080/ws');
     stompClient.current = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
       debug: (str) => console.log(str),
     });
 
-    stompClient.current.onConnect = (frame) => {
+    stompClient.current.onConnect = () => {
       stompClient.current.subscribe(`/topic/chat/${productoId}`, (message) => {
         const newMessage = JSON.parse(message.body);
-        setMessages(prev => [...prev, newMessage]);
+        setMessages(prev => [...prev, {
+          usuario: newMessage.sender,
+          contenido: newMessage.content,
+          fecha: newMessage.sentAt
+        }]);
       });
     };
 
@@ -45,6 +73,18 @@ const Chat = ({ productoId, onClose }) => {
     };
   }, [productoId]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setPosition({
+        x: window.innerWidth - 400,
+        y: window.innerHeight - 550,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const handleDragStart = (e) => {
     setIsDragging(true);
     dragStartPos.current = {
@@ -55,14 +95,11 @@ const Chat = ({ productoId, onClose }) => {
 
   const handleDrag = (e) => {
     if (!isDragging) return;
-    
     const newX = e.clientX - dragStartPos.current.x;
     const newY = e.clientY - dragStartPos.current.y;
-    
-    setPosition({
-      x: newX,
-      y: newY,
-    });
+    const boundedX = Math.max(0, Math.min(newX, window.innerWidth - 350));
+    const boundedY = Math.max(0, Math.min(newY, window.innerHeight - 500));
+    setPosition({ x: boundedX, y: boundedY });
   };
 
   const handleDragEnd = () => {
@@ -74,19 +111,18 @@ const Chat = ({ productoId, onClose }) => {
     if (!inputMessage.trim()) return;
 
     const newMessage = {
-      contenido: inputMessage,
-      fecha: new Date().toISOString(),
-      usuario: localStorage.getItem('usuario') || 'Anónimo',
-      productoId: productoId
+      sender: localStorage.getItem('usuario') || 'Anónimo',
+      content: inputMessage,
+      chatId: productoId
     };
 
-    if (stompClient.current && stompClient.current.connected) {
+    if (stompClient.current?.connected) {
       stompClient.current.publish({
-        destination: '/app/enviar-mensaje',
-        body: JSON.stringify(newMessage),
+        destination: '/app/chat.sendMessage',
+        body: JSON.stringify(newMessage)
       });
     }
-    
+
     setInputMessage('');
   };
 
@@ -95,7 +131,8 @@ const Chat = ({ productoId, onClose }) => {
       ref={chatContainerRef}
       className={styles.chatContainer}
       style={{
-        transform: `translate(${position.x}px, ${position.y}px)`,
+        left: `${position.x}px`,
+        top: `${position.y}px`,
         cursor: isDragging ? 'grabbing' : 'default',
       }}
     >
@@ -106,7 +143,7 @@ const Chat = ({ productoId, onClose }) => {
         onMouseUp={handleDragEnd}
         onMouseLeave={handleDragEnd}
       >
-        {usuario.nombre}
+        <span>{vendedor}</span>
         <button className={styles.closeButton} onClick={onClose}>×</button>
       </div>
 
@@ -114,18 +151,17 @@ const Chat = ({ productoId, onClose }) => {
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`${styles.message} ${
-              message.usuario === localStorage.getItem('usuario') 
-                ? styles.userMessage 
+            className={`${styles.message} ${message.usuario === (localStorage.getItem('usuario') || 'Anónimo')
+                ? styles.userMessage
                 : styles.otherMessage
-            }`}
+              }`}
           >
             <div className={styles.messageHeader}>
               <span className={styles.messageUser}>{message.usuario}</span>
               <span className={styles.messageTime}>
-                {new Date(message.fecha).toLocaleTimeString([], { 
-                  hour: '2-digit', 
-                  minute: '2-digit' 
+                {new Date(message.fecha).toLocaleTimeString([], {
+                  hour: '2-digit',
+                  minute: '2-digit',
                 })}
               </span>
             </div>

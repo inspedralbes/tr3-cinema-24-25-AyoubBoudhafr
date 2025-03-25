@@ -4,9 +4,15 @@ import com.simplyswap.Models.Tecnologia;
 import com.simplyswap.Repository.TecnologiaRepository;
 import com.simplyswap.Models.mensajeRespuesta;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/tecnologia")
@@ -16,8 +22,14 @@ public class TecnologiaController {
     private TecnologiaRepository tecnologiaRepository;
 
     @GetMapping
-    public List<Tecnologia> obtenerProductos() {
-        return tecnologiaRepository.findAll();
+    public List<Tecnologia> obtenerProductos(
+            @RequestParam(defaultValue = "0") int pagina,
+            @RequestParam(defaultValue = "5") int tamaño) {
+
+        Pageable pageable = PageRequest.of(pagina, tamaño);
+        Page<Tecnologia> paginaProductos = tecnologiaRepository.findAll(pageable);
+    
+        return paginaProductos.getContent();
     }
     @GetMapping("/{id}")
     public Tecnologia obtenerProductoPorId(@PathVariable Long id) {

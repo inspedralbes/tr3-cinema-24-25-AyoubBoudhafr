@@ -1,10 +1,12 @@
 package com.simplyswap.Controllers;
 
 import com.simplyswap.Models.Inmueble;
-import com.simplyswap.Models.Tecnologia;
 import com.simplyswap.Models.mensajeRespuesta;
 import com.simplyswap.Repository.InmuebleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +19,12 @@ public class InmuebleController {
     private InmuebleRepository inmuebleRepository;
 
     @GetMapping
-    public List<Inmueble> obtenerTodosProductos(){
-        return inmuebleRepository.findAll();
+    public List<Inmueble> obtenerTodosProductos(
+            @RequestParam(defaultValue = "0") int pagina,
+            @RequestParam(defaultValue = "10") int tamaño){
+        Pageable pageable = PageRequest.of(pagina, tamaño);
+        Page<Inmueble> paginaInmueble = inmuebleRepository.findAll(pageable);
+        return paginaInmueble.getContent();
     }
     @GetMapping("/{id}")
     public Inmueble obtenerInmueble(@PathVariable Long id){

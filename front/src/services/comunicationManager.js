@@ -2,20 +2,20 @@
 const API_URL_SPRING = process.env.NEXT_PUBLIC_API_URL_SPRING;
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
-export const getProductosTecnologicos = async () => {
+export const getProductosTecnologicos = async (page, size) => {
   try {
+    const response = await fetch(
+      `${API_URL_SPRING}/tecnologia?pagina=${page}&tamaño=${size}`
+    );
     
-    const response = await fetch(`${API_URL_SPRING}/tecnologia`);
-
-    if (!response.ok) {
-      throw new Error('Error en la solicitud GET');
-    }
-
+    if (!response.ok) throw new Error('Error en la solicitud GET');
+    
     const data = await response.json();
-    return data;
+    return data || [];
+    
   } catch (error) {
     console.error('Error en fetch GET:', error);
-    return null;
+    return [];
   }
 };
 
@@ -39,37 +39,40 @@ export const crearTecnologico = async (tecnologia) => {
     return null;
   }
 };
-export const getInmuebles = async () => {
-  try { 
-    console.log(`${API_URL_SPRING}/inmuebles`);
-    
-    const response = await fetch(`${API_URL_SPRING}/inmuebles`);
-
-    if (!response.ok) {
-      throw new Error('Error en la solicitud GET');
-    }
-
-    const data = await response.json();
-    return data;
+export const getInmuebles = async (page = 0, size = 1) => {
+  try {
+    const response = await fetch(
+      `${API_URL_SPRING}/inmuebles?pagina=${page}&tamaño=${size}`
+    );
+    if (!response.ok) throw new Error('Error en la solicitud GET');
+    return await response.json();
   } catch (error) {
     console.error('Error en fetch GET:', error);
-    return null;
+    return [];
   }
 };
-export const getMotor = async () => {
-  try { 
-
-    const response = await fetch(`${API_URL_SPRING}/motor`);
-
-    if (!response.ok) {
-      throw new Error('Error en la solicitud GET');
-    }
-
-    const data = await response.json();
-    return data;
+export const getMotor = async (page = 0, size = 1) => {
+  try {
+    const response = await fetch(
+      `${API_URL_SPRING}/motor?pagina=${page}&tamaño=${size}`
+    );
+    if (!response.ok) throw new Error('Error en la solicitud GET');
+    return await response.json();
   } catch (error) {
     console.error('Error en fetch GET:', error);
-    return null;
+    return [];
+  }
+};
+export const getLibros = async (page = 0, size = 1) => {
+  try {
+    const response = await fetch(
+      `${API_URL_SPRING}/libro?pagina=${page}&tamaño=${size}`
+    );
+    if (!response.ok) throw new Error('Error en la solicitud GET');
+    return await response.json();
+  } catch (error) {
+    console.error('Error en fetch GET:', error);
+    return [];
   }
 };
 export const login = async (credentials) => {
@@ -129,22 +132,6 @@ export const register = async (credenciales) => {
   }
 }
 
-export const getLibros = async () => {
-  try {
-
-    const response = await fetch(`${API_URL_SPRING}/libro`);
-
-    if (!response.ok) {
-      throw new Error('Error en la solicitud GET');
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error en fetch GET:', error);
-    return null;
-  }
-};
 export const getUnLibro = async (id) => {
   try{
     const response = await fetch(`${API_URL_SPRING}/libro/${id}`);
@@ -215,6 +202,19 @@ export const fetchUsuario = async (id, token) => {
     return data;
   } catch (error) {
     console.error('Error en la solicitud GET de usuario: ', error);
+    return null;
+  }
+}
+export const getMensajesChat = async (id) => {
+  try{
+    const response = await fetch(`${API_URL_SPRING}/mensajes/${id}`);
+    if(!response.ok){
+      throw new Error('Error la solicitud GET de libro')
+    }
+    const data = await response.json();
+    return data;
+  }catch(error){
+    console.error('Error en el GET del libro',error);
     return null;
   }
 }

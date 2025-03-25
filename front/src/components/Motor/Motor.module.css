@@ -1,23 +1,75 @@
 .contenedor {
-    padding: 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .sinResultados {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #666;
-    grid-column: 1 / -1;
-    margin-top: 2rem;
-  }
-  
-  @media (max-width: 768px) {
-    .contenedor {
+  padding: 20px;
+  position: relative;
+  min-height: 300px;
+}
+
+.lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.controles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.flecha {
+  padding: 8px 16px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  background: none;
+  color: #007bff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.flecha:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #666;
+  color: #666;
+}
+
+.flecha:hover:not(:disabled) {
+  background-color: #007bff;
+  color: white;
+}
+
+.paginaActual {
+  font-weight: bold;
+  color: #333;
+  min-width: 80px;
+  text-align: center;
+}
+
+.cargando {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #666;
+  font-style: italic;
+}
+
+.sinResultados {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .contenedor {
       padding: 1rem;
-      grid-template-columns: 1fr;
-    }
   }
+  .lista {
+      grid-template-columns: 1fr;
+  }
+}

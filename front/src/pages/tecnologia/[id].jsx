@@ -118,7 +118,7 @@ const TecnologiaDetalles = () => {
         </div>
       </div>
 
-      {showChat && <Chat productoId={id} onClose={() => setShowChat(false) } />}
+      {showChat && <Chat productoId={id} onClose={() => setShowChat(false) } vendedor={tecnologia.usuario.nombre} />}
     </div>
   );
 };
