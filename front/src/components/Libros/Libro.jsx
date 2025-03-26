@@ -45,7 +45,7 @@ const Libros = ({ busqueda }) => {
           disabled={paginaActual === 0 || cargando}
           className={styles.flecha}
         >
-          ◀
+          {'\u25C0'}
         </button>
 
         <span className={styles.paginaActual}>Página {paginaActual + 1}</span>
@@ -55,7 +55,7 @@ const Libros = ({ busqueda }) => {
           disabled={!hayMasPaginas || cargando}
           className={styles.flecha}
         >
-          ▶
+          {'\u25B6'}
         </button>
       </div>
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Producto from './Tecnologia_item/Producto';
 import { getProductosTecnologicos } from '../../services/comunicationManager';
 import styles from './Tecnologia.module.css';
-
+import {getChat} from '../../services/comunicationManager'
 const Tecnologia = ({ busqueda }) => {
   const [productos, setProductos] = useState([]);
   const [paginaActual, setPaginaActual] = useState(0);
@@ -48,7 +48,7 @@ const Tecnologia = ({ busqueda }) => {
           disabled={paginaActual === 0 || cargando}
           className={styles.flecha}
         >
-          ◀
+          {'\u25C0'}
         </button>
 
         <span className={styles.paginaActual}>
@@ -60,7 +60,7 @@ const Tecnologia = ({ busqueda }) => {
           disabled={!hayMasPaginas || cargando}
           className={styles.flecha}
         >
-          ▶
+          {'\u25B6'}
         </button>
       </div>
 

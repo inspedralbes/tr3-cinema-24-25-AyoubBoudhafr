@@ -41,21 +41,21 @@ const Inmuebles = ({ busqueda }) => {
 
       <div className={styles.controles}>
         <button
-          onClick={() => setPaginaActual(p => Math.max(0, p - 1))}
+          onClick={() => setPaginaActual((p) => Math.max(0, p - 1))}
           disabled={paginaActual === 0 || cargando}
           className={styles.flecha}
         >
-          ◀
+          {'\u25C0'}
         </button>
 
         <span className={styles.paginaActual}>Página {paginaActual + 1}</span>
 
         <button
-          onClick={() => setPaginaActual(p => p + 1)}
+          onClick={() => setPaginaActual((p) => p + 1)}
           disabled={!hayMasPaginas || cargando}
           className={styles.flecha}
         >
-          ▶
+          {'\u25B6'}
         </button>
       </div>
 

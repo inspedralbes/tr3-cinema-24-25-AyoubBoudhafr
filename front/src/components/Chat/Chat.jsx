@@ -1,65 +1,52 @@
 import { useState, useEffect, useRef } from 'react';
 import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
+import { getChat } from './../../services/comunicationManager';
 import styles from './Chat.module.css';
 
-const Chat = ({ productoId, onClose, vendedor }) => {
+const Chat = ({ productoId, onClose, vendedor, compradorId }) => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({
-    x: typeof window !== 'undefined' ? window.innerWidth - 400 : 50,
-    y: typeof window !== 'undefined' ? window.innerHeight - 500 : 50
+    x: window.innerWidth - 400,
+    y: window.innerHeight - 500,
   });
+  const [chatId, setChatId] = useState(null);
 
   const chatContainerRef = useRef(null);
   const stompClient = useRef(null);
   const dragStartPos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/api/mensajes/${productoId}`);
-
-        if (!response.ok) {
-          console.error('Respuesta no exitosa:', response.status);
-          setMessages([]);
-          return;
-        }
-
-        const result = await response.json();
-        const messagesData = Array.isArray(result) ? result : result?.content || [];
-
-        setMessages(messagesData.map(msg => ({
-          usuario: msg.sender || 'Desconocido',
-          contenido: msg.content || '',
-          fecha: msg.sentAt || new Date().toISOString()
-        })));
-
-      } catch (error) {
-        console.error('Error en la solicitud:', error);
-        setMessages([]);
+    const fetchChat = async () => {
+      const chat = await getChat(1, 1);
+      if (chat) {
+        setChatId(chat.id);
+        setMessages(chat.messages || []);
       }
     };
 
-    fetchMessages();
-  }, [productoId]);
+    fetchChat();
+  }, [compradorId, vendedor]);
 
   useEffect(() => {
+    if (!chatId) return;
+
     const socket = new SockJS('http://localhost:8080/ws');
     stompClient.current = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
-      debug: (str) => console.log(str),
+      debug: console.log,
     });
 
     stompClient.current.onConnect = () => {
-      stompClient.current.subscribe(`/topic/chat/${productoId}`, (message) => {
+      stompClient.current.subscribe(`/topic/chat/${chatId}`, (message) => {
         const newMessage = JSON.parse(message.body);
         setMessages(prev => [...prev, {
           usuario: newMessage.sender,
           contenido: newMessage.content,
-          fecha: newMessage.sentAt
+          fecha: newMessage.sentAt,
         }]);
       });
     };
@@ -67,11 +54,9 @@ const Chat = ({ productoId, onClose, vendedor }) => {
     stompClient.current.activate();
 
     return () => {
-      if (stompClient.current) {
-        stompClient.current.deactivate();
-      }
+      if (stompClient.current) stompClient.current.deactivate();
     };
-  }, [productoId]);
+  }, [chatId]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -97,29 +82,28 @@ const Chat = ({ productoId, onClose, vendedor }) => {
     if (!isDragging) return;
     const newX = e.clientX - dragStartPos.current.x;
     const newY = e.clientY - dragStartPos.current.y;
-    const boundedX = Math.max(0, Math.min(newX, window.innerWidth - 350));
-    const boundedY = Math.max(0, Math.min(newY, window.innerHeight - 500));
-    setPosition({ x: boundedX, y: boundedY });
+    setPosition({
+      x: Math.max(0, Math.min(newX, window.innerWidth - 350)),
+      y: Math.max(0, Math.min(newY, window.innerHeight - 500)),
+    });
   };
 
-  const handleDragEnd = () => {
-    setIsDragging(false);
-  };
+  const handleDragEnd = () => setIsDragging(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!inputMessage.trim()) return;
+    if (!inputMessage.trim() || !chatId) return;
 
     const newMessage = {
       sender: localStorage.getItem('usuario') || 'Anónimo',
       content: inputMessage,
-      chatId: productoId
+      chatId,
     };
 
     if (stompClient.current?.connected) {
       stompClient.current.publish({
         destination: '/app/chat.sendMessage',
-        body: JSON.stringify(newMessage)
+        body: JSON.stringify(newMessage),
       });
     }
 

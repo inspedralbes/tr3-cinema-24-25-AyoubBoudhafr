@@ -218,3 +218,21 @@ export const getMensajesChat = async (id) => {
     return null;
   }
 }
+export const getChat = async (compradorId, vendedorId) => {
+  try {
+    const response = await fetch(`${API_URL_SPRING}/chats/create`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ compradorId, vendedorId })
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
+    
+  } catch (error) {
+    console.error('Error en la solicitud POST del chat:', error);
+    return null;
+  }
+}
