@@ -20,8 +20,7 @@ const Chat = ({ productoId, onClose, vendedor, compradorId }) => {
 
   useEffect(() => {
     const fetchChat = async () => {
-      const chat = await getChat(2, 3);
-      console.log(chat);
+      const chat = await getChat(1, 2);
       if (chat) {
         setChatId(chat.id);
         setMessages(chat.messages || []);
@@ -38,7 +37,7 @@ const Chat = ({ productoId, onClose, vendedor, compradorId }) => {
     stompClient.current = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
-      debug: console.log,
+      //debug: console.log,
     });
 
     stompClient.current.onConnect = () => {
@@ -88,7 +87,6 @@ const Chat = ({ productoId, onClose, vendedor, compradorId }) => {
       y: Math.max(0, Math.min(newY, window.innerHeight - 500)),
     });
   };
-  console.log('nombre user', JSON.parse(localStorage.getItem('usuario')).nombre);
 
   const handleDragEnd = () => setIsDragging(false);
 

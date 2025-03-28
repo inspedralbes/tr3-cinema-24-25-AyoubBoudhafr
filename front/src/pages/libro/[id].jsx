@@ -2,12 +2,14 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { getUnLibro } from '../../services/comunicationManager';
 import styles from '../../styles/Detalles.module.css';
+import Chat from '../../components/Chat/Chat';
 
 const LibroDetalles = () => {
   const router = useRouter();
   const { id } = router.query;
   const [libro, setLibro] = useState(null);
   const [imagenSeleccionada, setImagenSeleccionada] = useState(0);
+  const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -122,11 +124,22 @@ const LibroDetalles = () => {
           <button className={styles.botonComprar} onClick={irPago}>
             Comprar
           </button>
-          <button className={styles.botonChat}>
-            Chat
+          <button
+            className={styles.botonChat}
+            onClick={() => {
+              const usuario = localStorage.getItem('usuario');
+              if (!usuario) {
+                alert('Necesitas iniciar sesión para usar el chat');
+                return;
+              }
+              setShowChat(!showChat);
+            }}
+          >
+            {showChat ? 'Cerrar Chat' : 'Abrir Chat'}
           </button>
         </div>
       </div>
+        {showChat && <Chat productoId={id} onClose={() => setShowChat(false)} vendedor={libro.usuario.nombre} />}
     </div>
   );
 };

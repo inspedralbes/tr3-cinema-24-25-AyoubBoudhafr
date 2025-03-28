@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../../styles/pago.module.css';
 import { compra } from '../../services/comunicationManager'
-import { toast, Toaster } from 'react-hot-toast';
+
 const Pago = () => {
     const router = useRouter();
     const [cardData, setCardData] = useState({
@@ -10,17 +10,13 @@ const Pago = () => {
         expiry: '',
         cvc: ''
     });
-    const showToast = (mensaje) => {
-        toast.success(mensaje, {
-          duration: 4000, // Duración en ms
-          position: 'top-right', // Posición del toast
-        });
-      };
     const [errors, setErrors] = useState({});
+    const [showAlert, setShowAlert] = useState(false);
+
     useEffect(() => {
         if(localStorage.getItem('usuario') == null){
             router.push('/')
-          }
+        }
         const savedData = localStorage.getItem('userData');
         if (!savedData){
             router.push('/compra/formulario');
@@ -28,8 +24,18 @@ const Pago = () => {
         const savedUser = localStorage.getItem('usuario');
         if(!savedUser){
             router.push('/')
-          }
+        }
     }, []);
+
+    useEffect(() => {
+        if(showAlert) {
+            const timer = setTimeout(() => {
+                setShowAlert(false);
+                router.push('/');
+            }, 4000);
+            return () => clearTimeout(timer);
+        }
+    }, [showAlert]);
 
     const validateCard = () => {
         const newErrors = {};
@@ -45,7 +51,6 @@ const Pago = () => {
         e.preventDefault();
         if (validateCard()) {
             const userData = JSON.parse(localStorage.getItem('userData'));
-            console.log(userData);
             const usuarioActual = JSON.parse(localStorage.getItem('usuario'));
             const producto = JSON.parse(localStorage.getItem('producto'));
             const categoriaCompra = localStorage.getItem('categoria');
@@ -58,19 +63,31 @@ const Pago = () => {
                 "compradorId": usuarioActual.id,
             }
             const response = await compra(datosCompra);
-            console.log(response);
             localStorage.removeItem('userData');
-            showToast('Pago exitoso!');
-            router.push('/');
+            setShowAlert(true);
         }
     };
 
     return (
         <div className={styles.container}>
-            <h1>Datos de Pago</h1>
+            {showAlert && (
+                <div className={styles.customAlert}>
+                    <div className={styles.alertContent}>
+                        <div className={styles.checkmark}>
+                            <svg className={styles.checkmarkIcon} viewBox="0 0 52 52">
+                                <circle className={styles.checkmarkCircle} cx="26" cy="26" r="25" fill="none"/>
+                                <path className={styles.checkmarkCheck} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                            </svg>
+                        </div>
+                        <h2 className={styles.alertTitle}>Pagament Completat</h2>
+                    </div>
+                </div>
+            )}
+            
+            <h1>Dades de pagament</h1>
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.formGroup}>
-                    <label>Número de Tarjeta</label>
+                    <label>Número de Targeta</label>
                     <input
                         type="text"
                         value={cardData.number}
@@ -83,7 +100,7 @@ const Pago = () => {
 
                 <div className={styles.formRow}>
                     <div className={styles.formGroup}>
-                        <label>Expiración (MM/AA)</label>
+                        <label>Expiració (MM/AA)</label>
                         <input
                             type="text"
                             value={cardData.expiry}
@@ -109,10 +126,10 @@ const Pago = () => {
 
                 <div className={styles.buttonGroup}>
                     <button type="button" className={styles.backButton} onClick={() => router.push('/compra/formulario')}>
-                        Volver
+                        Tornar
                     </button>
                     <button type="submit" className={styles.submitButton}>
-                        Pagar Ahora
+                        Pagar Ara
                     </button>
                 </div>
             </form>

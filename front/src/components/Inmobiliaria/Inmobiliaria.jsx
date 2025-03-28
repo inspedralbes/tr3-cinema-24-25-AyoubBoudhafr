@@ -9,9 +9,10 @@ const Inmuebles = ({ busqueda }) => {
   const [paginaActual, setPaginaActual] = useState(0);
   const [hayMasPaginas, setHayMasPaginas] = useState(true);
   const [cargando, setCargando] = useState(false);
-  const TAMANO_PAGINA = 2;
+  const TAMANO_PAGINA = 5;
 
   useEffect(() => {
+    localStorage.setItem('categoria', 'inmobiliaria');
     const fetchInmuebles = async () => {
       setCargando(true);
       try {
@@ -59,7 +60,7 @@ const Inmuebles = ({ busqueda }) => {
         </button>
       </div>
 
-      {cargando && <div className={styles.cargando}>Cargando...</div>}
+      {cargando && <div className={styles.cargando}>Carregant...</div>}
     </div>
   );
 };

@@ -2,12 +2,14 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { getUnInmueble } from '../../services/comunicationManager';
 import styles from '../../styles/Detalles.module.css';
+import Chat from '../../components/Chat/Chat';
 
 const InmuebleDetalles = () => {
   const router = useRouter();
   const { id } = router.query;
   const [inmueble, setInmueble] = useState(null);
   const [imagenSeleccionada, setImagenSeleccionada] = useState(0);
+  const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -104,18 +106,29 @@ const InmuebleDetalles = () => {
           {inmueble.ciudad}, {inmueble.pais}
         </p>
         <p className={styles.fecha}>
-          Publicado: {new Date(inmueble.fechaPublicacion).toLocaleDateString()}
+          Publicat: {new Date(inmueble.fechaPublicacion).toLocaleDateString()}
         </p>
         <p className={styles.precio}>
           {inmueble.precio}
           {'\u20AC'}
         </p>
         <div className={styles.botonesAccion}>
-          <button className={styles.botonComprar}>
-            Chat
+        <button
+            className={styles.botonChat}
+            onClick={() => {
+              const usuario = localStorage.getItem('usuario');
+              if (!usuario) {
+                alert('Necesitas iniciar sesión para usar el chat');
+                return;
+              }
+              setShowChat(!showChat);
+            }}
+          >
+            {showChat ? 'Cerrar Chat' : 'Abrir Chat'}
           </button>
         </div>
       </div>
+      {showChat && <Chat productoId={id} onClose={() => setShowChat(false)} vendedor={inmueble.usuario.nombre} />}
     </div>
   );
 };

@@ -9,9 +9,10 @@ const Libros = ({ busqueda }) => {
   const [paginaActual, setPaginaActual] = useState(0);
   const [hayMasPaginas, setHayMasPaginas] = useState(true);
   const [cargando, setCargando] = useState(false);
-  const TAMANO_PAGINA = 1;
+  const TAMANO_PAGINA = 9;
 
   useEffect(() => {
+    localStorage.setItem('categoria', 'libro');
     const fetchLibros = async () => {
       setCargando(true);
       try {
@@ -48,7 +49,7 @@ const Libros = ({ busqueda }) => {
           {'\u25C0'}
         </button>
 
-        <span className={styles.paginaActual}>Página {paginaActual + 1}</span>
+        <span className={styles.paginaActual}>Pàgina {paginaActual + 1}</span>
 
         <button
           onClick={() => setPaginaActual(p => p + 1)}
@@ -59,7 +60,7 @@ const Libros = ({ busqueda }) => {
         </button>
       </div>
 
-      {cargando && <div className={styles.cargando}>Cargando...</div>}
+      {cargando && <div className={styles.cargando}>Carregant...</div>}
     </div>
   );
 };

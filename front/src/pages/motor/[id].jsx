@@ -2,12 +2,14 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { getUnMotor } from '../../services/comunicationManager';
 import styles from '../../styles/Detalles.module.css';
+import Chat from '../../components/Chat/Chat';
 
 const MotorDetalles = () => {
   const router = useRouter();
   const { id } = router.query;
   const [motor, setMotor] = useState(null);
   const [imagenSeleccionada, setImagenSeleccionada] = useState(0);
+  const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -25,19 +27,19 @@ const MotorDetalles = () => {
   }, [id]);
 
   useEffect(() => {
-    if(motor){
-        setTimeout(() => {
-            window.scrollTo({
-                top: 100,
-                behavior: 'smooth',
-            });
-        }, 0);
+    if (motor) {
+      setTimeout(() => {
+        window.scrollTo({
+          top: 100,
+          behavior: 'smooth',
+        });
+      }, 0);
     }
-    }, [motor]);
+  }, [motor]);
 
   if (!motor || !motor.imagenes) {
-  return <div>Cargando...</div>;
-}
+    return <div>Carregant...</div>;
+  }
 
 
   const cambiarImagen = (direccion) => {
@@ -102,13 +104,24 @@ const MotorDetalles = () => {
         </p>
         <p className={styles.descripcion}>{motor.descripcion}</p>
         <p className={styles.fecha}>
-          Publicado: {new Date(motor.fechaPublicacion).toLocaleDateString()}
+          Publicat: {new Date(motor.fechaPublicacion).toLocaleDateString()}
         </p>
 
-        <div className={styles.botonesAccion}>
-          <button className={styles.botonComprar}>Chat</button>
-        </div>
+        <button
+          className={styles.botonChat}
+          onClick={() => {
+            const usuario = localStorage.getItem('usuario');
+            if (!usuario) {
+              alert('Necesitas iniciar sesión para usar el chat');
+              return;
+            }
+            setShowChat(!showChat);
+          }}
+        >
+          {showChat ? 'Cerrar Chat' : 'Abrir Chat'}
+        </button>
       </div>
+      {showChat && <Chat productoId={id} onClose={() => setShowChat(false)} vendedor={motor.usuario.nombre} />}
     </div>
   );
 };

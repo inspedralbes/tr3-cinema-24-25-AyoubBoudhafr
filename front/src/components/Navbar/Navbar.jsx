@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './Navbar.module.css';  
 import { useRouter } from 'next/navigation';
@@ -7,10 +7,17 @@ import { FaRegUser, FaRegHeart, FaRegCommentDots, FaPlusCircle } from 'react-ico
 
 const Navbar = ({ busqueda, setBusqueda }) => {
   const router = useRouter();
+  // const [categoria, setCategoria] = useState("");
+
+  // useEffect(() => {
+  //     const storedCategoria = localStorage.getItem('categoria') || "tecnologia";
+  //     setCategoria(storedCategoria);
+  // }, []);
 
   const toLanding = () => {
     router.push('/');
-  }
+  };
+
   return (
     <nav className={styles.navbar}>
       <h1 className={styles['navbar-title']} onClick={toLanding}>SimplySwap</h1>
@@ -18,7 +25,7 @@ const Navbar = ({ busqueda, setBusqueda }) => {
         type="text"
         placeholder="Estic buscant..."
         value={busqueda}
-        // onChange={(e) => setBusqueda(e.target.value)}
+        onChange={(e) => setBusqueda(e.target.value)}
         className={styles['navbar-input']}
       />
       <div className={styles['navbar-icons']}>
@@ -31,7 +38,7 @@ const Navbar = ({ busqueda, setBusqueda }) => {
         <Link href="/perfil">
           <FaRegUser className={styles['navbar-icon']} />
         </Link>
-        <Link href="/vendre">
+        <Link href={`/tecnologia/crear`}>
           <FaPlusCircle className={styles['navbar-icon']} />
         </Link>
       </div>

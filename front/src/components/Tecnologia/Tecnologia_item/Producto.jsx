@@ -59,7 +59,7 @@ const Producto = ({ id,nombre, precio, imagenes, envioDisponible }) => {
               <svg className={styles.envioIcono} viewBox="0 0 24 24">
                 <path d="M18 18.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm1.5-9H17V12h4.46L19.5 9.5zM6 18.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM20 8l3 4v5h-2c0 1.66-1.34 3-3 3s-3-1.34-3-3H9c0 1.66-1.34 3-3 3s-3-1.34-3-3H1V6c0-1.11.89-2 2-2h14v4h3zM3 6v9h.76c.55-.61 1.35-1 2.24-1 .89 0 1.69.39 2.24 1H15V6H3z" />
               </svg>
-              Envío disponible
+              Enviament disponible
             </span>
           </>
         ) : envioDisponible === false ? (
@@ -68,11 +68,11 @@ const Producto = ({ id,nombre, precio, imagenes, envioDisponible }) => {
               <svg className={styles.envioIcono} viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5l7.51-3.49L17.5 6.5 9.99 9.99 6.5 17.5zm5.5-6.6c.61 0 1.1.49 1.1 1.1s-.49 1.1-1.1 1.1-1.1-.49-1.1-1.1.49-1.1 1.1-1.1z" />
               </svg>
-              Entrega solo en persona
+              Lliurament només en persona
             </span>
           </>
         ) : (
-          <span>Estado de envío no disponible</span>
+          <span>Estat d'enviament no disponible</span>
         )}
       </div>
     </div>

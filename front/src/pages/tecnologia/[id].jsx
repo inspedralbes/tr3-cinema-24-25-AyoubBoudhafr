@@ -50,7 +50,7 @@ const TecnologiaDetalles = () => {
   };
 
   if (!tecnologia) {
-    return <div className={styles.loading}>Cargando...</div>;
+    return <div className={styles.loading}>Carregant...</div>;
   }
 
   return (
@@ -102,23 +102,34 @@ const TecnologiaDetalles = () => {
         </div>
 
         <h1 className={styles.nombre}>{tecnologia.nombre}</h1>
-        <p className={styles.precio}>{tecnologia.precio} €</p>
+        <p className={styles.precio}>{tecnologia.precio} {'\u20AC'}</p>
         <p className={styles.descripcion}>{tecnologia.descripcion}</p>
         <p className={styles.fecha}>
-          Publicado: {new Date(tecnologia.fechaPublicacion).toLocaleDateString()}
+          Publicat: {new Date(tecnologia.fechaPublicacion).toLocaleDateString()}
         </p>
 
         <div className={styles.botonesAccion}>
           <button className={styles.botonComprar} onClick={irPago}>
             Comprar
           </button>
-          <button className={styles.botonChat} onClick={() => setShowChat(!showChat)}>
+          <button
+            className={styles.botonChat}
+            onClick={() => {
+              const usuario = localStorage.getItem('usuario');
+              if (!usuario) {
+                alert('Necesitas iniciar sesión para usar el chat');
+                return;
+              }
+              setShowChat(!showChat);
+            }}
+          >
             {showChat ? 'Cerrar Chat' : 'Abrir Chat'}
           </button>
+
         </div>
       </div>
 
-      {showChat && <Chat productoId={id} onClose={() => setShowChat(false) } vendedor={tecnologia.usuario.nombre} />}
+      {showChat && <Chat productoId={id} onClose={() => setShowChat(false)} vendedor={tecnologia.usuario.nombre} />}
     </div>
   );
 };

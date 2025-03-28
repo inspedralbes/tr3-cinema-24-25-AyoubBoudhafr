@@ -39,7 +39,7 @@ export const crearTecnologico = async (tecnologia) => {
     return null;
   }
 };
-export const getInmuebles = async (page = 0, size = 1) => {
+export const getInmuebles = async (page, size) => {
   try {
     const response = await fetch(
       `${API_URL_SPRING}/inmuebles?pagina=${page}&tamaño=${size}`
@@ -51,7 +51,7 @@ export const getInmuebles = async (page = 0, size = 1) => {
     return [];
   }
 };
-export const getMotor = async (page = 0, size = 1) => {
+export const getMotor = async (page, size) => {
   try {
     const response = await fetch(
       `${API_URL_SPRING}/motor?pagina=${page}&tamaño=${size}`
@@ -63,7 +63,7 @@ export const getMotor = async (page = 0, size = 1) => {
     return [];
   }
 };
-export const getLibros = async (page = 0, size = 1) => {
+export const getLibros = async (page, size) => {
   try {
     const response = await fetch(
       `${API_URL_SPRING}/libro?pagina=${page}&tamaño=${size}`
@@ -158,6 +158,7 @@ export const getUnInmueble = async (id) =>{
     return null;
   }
 }
+
 export const getUnMotor = async (id) =>{
   try{
     const response = await fetch(`${API_URL_SPRING}/motor/${id}`);
@@ -236,3 +237,79 @@ export const getChat = async (compradorId, vendedorId) => {
     return null;
   }
 }
+export const crearTecnologia = async (producto) => {
+  try {
+    const response = await fetch(`${API_URL_SPRING}/tecnologia`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(producto),
+    });
+    if (!response.ok) {
+      throw new Error('Error en la creación del producto');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error creando producto de tecnología:', error);
+    return null;
+  }
+};
+
+export const actualizarTecnologia = async (id, productoActualizado) => {
+  try {
+    const response = await fetch(`${API_URL_SPRING}/tecnologia/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productoActualizado),
+    });
+    if (!response.ok) {
+      throw new Error('Error actualizando el producto');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error actualizando producto de tecnología:', error);
+    return null;
+  }
+};
+
+export const eliminarTecnologia = async (id) => {
+  try {
+    const response = await fetch(`${API_URL_SPRING}/tecnologia/${id}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error('Error eliminando el producto');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error eliminando producto de tecnología:', error);
+    return null;
+  }
+};
+export const uploadImage = async (file) => {
+  const formData = new FormData();
+  formData.append('image', file);
+
+  try {
+    const response = await fetch(`${API_URL_SPRING}/upload`, {
+      method: 'POST',
+      body: formData,
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Error subiendo imagen');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    throw error;
+  }
+};

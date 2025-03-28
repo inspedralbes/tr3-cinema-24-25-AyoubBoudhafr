@@ -33,10 +33,10 @@ const formularioPago = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Datos Personales</h1>
+      <h1>Dades Personals</h1>
       <form onSubmit={handleContinue} className={styles.form}>
         <div className={styles.formGroup}>
-          <label>Nombre Completo</label>
+          <label>Nom Complet</label>
           <input
             type="text"
             value={userData.name}
@@ -58,7 +58,7 @@ const formularioPago = () => {
         </div>
 
         <div className={styles.formGroup}>
-          <label>Dirección de Envío</label>
+          <label>Direcció d'Enviament</label>
           <input
             type="text"
             value={userData.address}
@@ -69,7 +69,7 @@ const formularioPago = () => {
         </div>
 
         <button type="submit" className={styles.button}>
-          Continuar al Pago
+        Continuar al Pagament
         </button>
       </form>
     </div>

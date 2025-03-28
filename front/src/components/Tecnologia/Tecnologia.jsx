@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Producto from './Tecnologia_item/Producto';
 import { getProductosTecnologicos } from '../../services/comunicationManager';
 import styles from './Tecnologia.module.css';
-import {getChat} from '../../services/comunicationManager'
+
 const Tecnologia = ({ busqueda }) => {
   const [productos, setProductos] = useState([]);
   const [paginaActual, setPaginaActual] = useState(0);
   const [hayMasPaginas, setHayMasPaginas] = useState(true);
   const [cargando, setCargando] = useState(false);
-  const TAMANO_PAGINA = 5; 
+  const TAMANO_PAGINA = 10; 
 
   useEffect(() => {
+    localStorage.setItem('categoria', 'tecnologia');
     const fetchProductos = async () => {
       setCargando(true);
       try {

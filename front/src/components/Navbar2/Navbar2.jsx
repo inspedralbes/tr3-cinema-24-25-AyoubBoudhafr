@@ -12,7 +12,7 @@ const Navbar2 = () => {
           <FaCar className={styles['nav2-icon']} />
         </Link>
         <Link href="/motor">
-          <span>Vehículos</span>
+          <span>Vehicles</span>
         </Link>
       </div>
       <div className={styles['nav2-item']}>
@@ -20,7 +20,7 @@ const Navbar2 = () => {
           <FaBuilding className={styles['nav2-icon']} />
         </Link>
         <Link href="/inmobiliaria">
-          <span>Propiedades</span>
+          <span>Propietats</span>
         </Link>
       </div>
       <div className={styles['nav2-item']}>
@@ -36,7 +36,7 @@ const Navbar2 = () => {
           <FaLaptop className={styles['nav2-icon']} />
         </Link>
         <Link href="/tecnologia">
-          <span>Electrónica</span>
+          <span>Llibres</span>
         </Link>
       </div>
     </nav>

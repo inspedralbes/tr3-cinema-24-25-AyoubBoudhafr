@@ -1,27 +1,59 @@
-    INSERT INTO usuarios (nombre, email, password, telefono, ciudad, pais, foto_perfil)
+INSERT INTO usuarios (nombre, email, password, telefono, ciudad, pais, foto_perfil)
     VALUES 
     ('Juan Pérez', 'juan@gmail.com', '$2a$10$3sFvB/9yzzsrBs.4ZDYm4erNtDVNXDaAMCKC9BHuP47/XnT7HzbiO', '123456789', 'Madrid', 'España', '/assets/juan.webp'),
     ('Ayoub Boudhafri', 'admin@gmail.com', '$2a$10$3sFvB/9yzzsrBs.4ZDYm4erNtDVNXDaAMCKC9BHuP47/XnT7HzbiO', '987654321', 'Barcelona', 'España', '/assets/maria.webp');
 
-    INSERT INTO inmueble (descripcion_short, descripcion, direccion, ciudad, pais, precio,fecha_publicacion,usuario_id)
+    INSERT INTO inmueble (descripcion_short, descripcion, direccion, ciudad, pais, precio, fecha_publicacion, usuario_id)
     VALUES 
-    ('Hermoso apartamento', 'Apartamento de lujo con vista al mar', 'Av. Principal 123', 'Barcelona', 'España',650000,NOW(),1),
-    ('Casa acogedora', 'Casa con amplio jardín y piscina', 'Av. Diagonal 456', 'Madrid', 'España',199000,NOW(),1),
-    ('JUAN', 'Casa con amplio jardín y piscina', 'Av. Diagonal 456', 'Madrid', 'España',199000,NOW(),1);
+    ('Ático moderno', 'Ático con terraza privada y vistas panorámicas', 'Calle Luna 10', 'Valencia', 'España', 450000, NOW(), 2),
+    ('Chalet exclusivo', 'Chalet con jardín, piscina y área de barbacoa', 'Camino Verde 75', 'Sevilla', 'España', 700000, NOW(), 3),
+    ('Estudio céntrico', 'Estudio moderno cerca de zonas comerciales', 'Plaza Mayor 22', 'Granada', 'España', 120000, NOW(), 4),
+    ('Casa rural', 'Casa de campo con terreno y huerta', 'Camino Rural s/n', 'Toledo', 'España', 180000, NOW(), 5),
+    ('Loft minimalista', 'Loft de diseño en el centro urbano', 'Calle Sol 18', 'Zaragoza', 'España', 320000, NOW(), 6),
+    ('Dúplex elegante', 'Dúplex con terraza y excelente iluminación', 'Avenida Marítima 101', 'Málaga', 'España', 500000, NOW(), 7),
+    ('Apartamento familiar', 'Apartamento amplio ideal para familias', 'Calle Otoño 3', 'Bilbao', 'España', 350000, NOW(), 8),
+    ('Villa de lujo', 'Villa exclusiva en zona residencial', 'Urbanización La Palma 8', 'Santander', 'España', 950000, NOW(), 9),
+    ('Piso reformado', 'Piso completamente renovado con acabados modernos', 'Calle Flores 14', 'Cádiz', 'España', 290000, NOW(), 10),
+    ('Bungalow acogedor', 'Bungalow con terraza y vistas al jardín', 'Calle Jardines 2', 'Alicante', 'España', 220000, NOW(), 11);
 
-    INSERT INTO inmueble_imagenes (inmueble_id, imagen_url)
+INSERT INTO inmueble_imagenes (inmueble_id, imagen_url)
     VALUES 
-    (1, '/assets/hermosoApartamento.webp'),
-    (1, '/assets/hermosoApartamento2.webp'),
-    (1, '/assets/hermosoApartamento3.webp'),
-    (1, '/assets/hermosoApartamento4.webp'),
-    (1, '/assets/hermosoApartamento5.webp'),
-    (2, '/assets/casaAcojedora.webp'),
-    (2, '/assets/casaAcojedora2.webp'),
-    (2, '/assets/casaAcojedora3.webp'),
-    (2, '/assets/casaAcojedora4.webp'),
-    (2, '/assets/casaAcojedora5.webp'),
-    (2, '/assets/casaAcojedora6.webp');
+    (1, '/assets/aticoModerno1.webp'),
+    (1, '/assets/aticoModerno2.webp'),
+    (1, '/assets/aticoModerno3.webp'),
+    (2, '/assets/chaletExclusivo1.webp'),
+    (2, '/assets/chaletExclusivo2.webp'),
+    (2, '/assets/chaletExclusivo3.webp'),
+    (2, '/assets/chaletExclusivo4.webp'),
+    (3, '/assets/estudioCentrico1.webp'),
+    (3, '/assets/estudioCentrico2.webp'),
+    (3, '/assets/estudioCentrico3.webp'),
+    (4, '/assets/casaRural1.webp'),
+    (4, '/assets/casaRural2.webp'),
+    (4, '/assets/casaRural3.webp'),
+    (4, '/assets/casaRural4.webp'),
+    (5, '/assets/loftMinimalista1.webp'),
+    (5, '/assets/loftMinimalista2.webp'),
+    (5, '/assets/loftMinimalista3.webp'),
+    (6, '/assets/duplexElegante1.webp'),
+    (6, '/assets/duplexElegante2.webp'),
+    (6, '/assets/duplexElegante3.webp'),
+    (7, '/assets/apartamentoFamiliar1.webp'),
+    (7, '/assets/apartamentoFamiliar2.webp'),
+    (7, '/assets/apartamentoFamiliar3.webp'),
+    (8, '/assets/villaDeLujo1.webp'),
+    (8, '/assets/villaDeLujo2.webp'),
+    (8, '/assets/villaDeLujo3.webp'),
+    (8, '/assets/villaDeLujo4.webp'),
+    (9, '/assets/pisoReformado1.webp'),
+    (9, '/assets/pisoReformado2.webp'),
+    (9, '/assets/pisoReformado3.webp'),
+    (10, '/assets/bungalowAcogedor1.webp'),
+    (10, '/assets/bungalowAcogedor2.webp'),
+    (10, '/assets/bungalowAcogedor3.webp'),
+    (10, '/assets/bungalowAcogedor4.webp'),
+    (10, '/assets/bungalowAcogedor5.webp');
+
 
     INSERT INTO libro (precio, nombre, autor, descripcion, fecha_publicacion, entrega_disponible,fecha_publicacion_producto,usuario_id)
     VALUES 
@@ -114,4 +146,4 @@
     (9, '/assets/applewatch7_4.webp'),
     (10, '/assets/airpodspro.webp'),
     (10, '/assets/airpodspro_2.webp'),
-    (10, '/assets/airpodspro_3.webp');
+    (10, '/assets/airpodspro_3.webp')

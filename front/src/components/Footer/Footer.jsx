@@ -5,12 +5,12 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
-        <p>&copy; {new Date().getFullYear()} SimplySwap. Todos los derechos reservados.</p>
+        <p>&copy; {new Date().getFullYear()} SimplySwap. Tots els drets reservats.</p>
         <nav>
           <ul className={styles.footerNav}>
-            <li><a href="/privacy">Política de Privacidad</a></li>
-            <li><a href="/terms">Términos de Uso</a></li>
-            <li><a href="/contact">Contacto</a></li>
+            <li><a href="/privacy">Política de Privadesa</a></li>
+            <li><a href="/terms">Termes d'ús</a></li>
+            <li><a href="/contact">Contacte</a></li>
           </ul>
         </nav>
       </div>

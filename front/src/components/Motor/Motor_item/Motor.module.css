@@ -1,7 +1,7 @@
 .motor {
   position: relative;
   padding: 20px;
-  margin: 20px auto; 
+  margin: 10px auto; 
   border-radius: 10px;
   width: 80%;       
   max-width: 1000px; 
@@ -71,19 +71,15 @@
     justify-content: space-between;
   }
   
-  .header {
-    margin-bottom: 1.5rem;
-  }
   
   .titulo {
-    font-size: 2rem;
+    font-size: 1.6rem;
     color: #333;
-    margin: 0 0 0.5rem 0;
   }
   
   .precio {
     color: rgb(7, 115, 7);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     margin: 0;
   }

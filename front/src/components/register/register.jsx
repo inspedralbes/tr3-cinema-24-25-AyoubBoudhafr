@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { register, login } from '../../services/comunicationManager';
 import { useRouter } from 'next/navigation';
 import styles from './Register.module.css';
@@ -11,7 +11,18 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [telefono, setTelefono] = useState('');
   const [error, setError] = useState(null);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if(showSuccessAlert) {
+      const timer = setTimeout(() => {
+        router.push('/');
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccessAlert, router]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -23,24 +34,13 @@ const Register = () => {
       telefono: telefono
     };
 
-    const credencialesLogin = {
-      email: email,
-      password: password
-    };
-
-    console.log('credencialesRegister', credencialesRegister);
-
     try {
       const response = await register(credencialesRegister);
-      console.log('respuesta de back', response);
-
-      const responseLogin = await login(credencialesLogin);
-      console.log('data login', responseLogin);
-      console.log('token:', responseLogin.token, 'usuario:', responseLogin.user);
+      const responseLogin = await login({ email, password });
 
       localStorage.setItem('token', responseLogin.token);
       localStorage.setItem('usuario', JSON.stringify(responseLogin.user));
-      router.push('/');
+      setShowSuccessAlert(true);
       
     } catch (error) {
       console.error('Error al hacer register', error);
@@ -48,9 +48,22 @@ const Register = () => {
     }
   };
 
-
   return (
     <div className={styles['login-container']}>
+      {showSuccessAlert && (
+        <div className={styles.customAlert}>
+          <div className={styles.alertContent}>
+            <div className={styles.checkmark}>
+              <svg className={styles.checkmarkIcon} viewBox="0 0 52 52">
+                <circle className={styles.checkmarkCircle} cx="26" cy="26" r="25" fill="none"/>
+                <path className={styles.checkmarkCheck} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+              </svg>
+            </div>
+            <h2 className={styles.alertTitle}>Registre Exitos</h2>
+          </div>
+        </div>
+      )}
+
       <div className={styles['login-box']}>
         <h1 className={styles['login-title']}>Register</h1>
         {error && <p className={styles['login-error']}>{error}</p>}
