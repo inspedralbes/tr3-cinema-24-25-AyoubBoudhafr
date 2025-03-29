@@ -14,29 +14,31 @@ jobs:
       - name: 📥 Obtenint el codi del repositori
         uses: actions/checkout@v4
         
-      - name: 📂 Canviar al directori del projecte
-        run: cd front
-
       - name: ⚙️ Configurar Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: npm
+          working-directory: front
 
       - name: 📦 Instal·lant dependències
         run: npm install
+        working-directory: front
 
       - name: 🧪 Executant tests
         run: npm run test
+        working-directory: front
 
       - name: 🏗️ Construint l'aplicació Next.js
         run: npm run build
+        working-directory: front
 
       - name: 🚀 Desplegant a producció amb SCP
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/prod_key.pem
           chmod 600 ~/prod_key.pem
           mkdir -p ./deploy
-          cp -r .next package.json public ./deploy
+          cp -r front/.next front/package.json front/public ./deploy
           echo "Desplegat a producció" > ./deploy/last_deploy.txt
           date >> ./deploy/last_deploy.txt
           scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i "~/prod_key.pem" ./deploy/* \
