@@ -28,7 +28,7 @@ const Navbar2 = () => {
           <FaBookOpen className={styles['nav2-icon']} />
         </Link>
         <Link href="/libro">
-          <span>Libros</span>
+          <span>Llibres</span>
         </Link>
       </div>
       <div className={styles['nav2-item']}>
@@ -36,7 +36,7 @@ const Navbar2 = () => {
           <FaLaptop className={styles['nav2-icon']} />
         </Link>
         <Link href="/tecnologia">
-          <span>Llibres</span>
+          <span>Electrònica</span>
         </Link>
       </div>
     </nav>
