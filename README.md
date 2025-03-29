@@ -13,6 +13,8 @@ SimplySwap és una plataforma web moderna i fàcil d'utilitzar dissenyada per a 
 - Sistema de valoracions i ressenyes
 - Gestió de perfil d'usuari
 - Panell d'administració
+- Testing automatitzat dels components principals
+- Integració contínua amb GitHub Actions
 
 ## 🛠️ Tecnologies Utilitzades
 ### Frontend
@@ -20,6 +22,8 @@ SimplySwap és una plataforma web moderna i fàcil d'utilitzar dissenyada per a 
 - React
 - Tailwind CSS
 - Docker
+- Jest i Testing Library per testing
+- GitHub Actions per CI/CD
 
 ### Backend
 - Spring Boot
@@ -54,10 +58,23 @@ L'aplicació estarà disponible a:
 - Backend: http://localhost:8080
 - Adminer: http://localhost:8081
 
+### Execució de Tests
+Per executar els tests del frontend:
+```bash
+cd front
+npm test
+```
+
 ## 📚 Documentació Addicional
 - [Documentació Frontend](/front/README.md)
 - [Documentació Backend](/back/README.md)
 - [Documentació API](/doc/API.md)
+
+## 🔄 Integració Contínua
+El projecte utilitza GitHub Actions per:
+- Executar tests automàticament en cada push
+- Desplegar automàticament el frontend en Next.js
+- Verificar la qualitat del codi
 
 ## 📈 Estat del Projecte
 Aquest projecte forma part del grau superior de Desenvolupament d'Aplicacions Web, on disposàvem de 4 setmanes per al seu desenvolupament. Degut a aquesta limitació temporal, hi ha algunes funcionalitats que no s'han pogut completar totalment:
@@ -68,11 +85,13 @@ Aquest projecte forma part del grau superior de Desenvolupament d'Aplicacions We
 - Llistat i filtratge de productes
 - Interfície d'usuari responsive
 - Configuració de Docker per a desenvolupament
+- Tests dels components principals (Login, Register)
+- Integració contínua amb GitHub Actions
 
 ### Funcionalitats Pendents:
 - Sistema de xat en temps real
 - Implementació completa de valoracions
-- Tests unitaris i d'integració
+- Ampliació de la cobertura de tests
 - Optimització de rendiment
 - Millores en la seguretat
 
