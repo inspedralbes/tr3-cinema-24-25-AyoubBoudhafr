@@ -1,4 +1,3 @@
-// __tests__/Landing.test.js
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Landing from '../src/pages/index';

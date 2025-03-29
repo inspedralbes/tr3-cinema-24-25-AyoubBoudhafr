@@ -16,7 +16,6 @@ const InmuebleDetalles = () => {
       const fetchInmueble = async () => {
         try {
           const data = await getUnInmueble(id);
-          console.log('datos InmuebleDetalles', data);
           setInmueble(data);
         } catch (error) {
           console.error('Error al obtener el inmueble:', error);

@@ -88,7 +88,6 @@ export const login = async (credentials) => {
     }
 
     const data = await response.json();
-    console.log('Respuesta del login:', data);
     return data;
   } catch (error) {
     console.error('Error en login:', error);
@@ -173,7 +172,6 @@ export const getUnMotor = async (id) =>{
   }
 }
 export const getUnaTecnologia = async (id) =>{
-  console.log(`${API_URL_SPRING}/tecnologia/${id}`);
   
   try{
     const response = await fetch(`${API_URL_SPRING}/tecnologia/${id}`);
@@ -229,7 +227,6 @@ export const getChat = async (compradorId, vendedorId) => {
       body: JSON.stringify({ compradorId, vendedorId })
     });
     const data = await response.json();
-    console.log(data);
     return data;
     
   } catch (error) {

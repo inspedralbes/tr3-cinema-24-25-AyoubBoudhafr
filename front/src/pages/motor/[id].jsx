@@ -16,7 +16,6 @@ const MotorDetalles = () => {
       const fetchMotor = async () => {
         try {
           const data = await getUnMotor(id);
-          console.log('datos MotorDetalles', data);
           setMotor(data);
         } catch (error) {
           console.error('Error al obtener el motor:', error);

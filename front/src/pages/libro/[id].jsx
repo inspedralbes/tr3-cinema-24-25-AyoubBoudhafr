@@ -16,7 +16,6 @@ const LibroDetalles = () => {
       const fetchLibro = async () => {
         try {
           const data = await getUnLibro(id);
-          console.log('datos LibroDetalles', data);
           setLibro(data);
         } catch (error) {
           console.error('Error al obtener el libro:', error);
