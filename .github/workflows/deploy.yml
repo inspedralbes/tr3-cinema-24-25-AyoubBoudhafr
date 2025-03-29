@@ -1,0 +1,44 @@
+name: Preparant per producció
+run-name: ${{ github.actor }} està pujant l'aplicació a PROD
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  Test-i-Pujar-a-Produccio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Obtenint el codi del repositori
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 📦 Instal·lant dependències
+        run: npm install
+
+      - name: 🧪 Executant tests
+        run: npm run test
+
+      - name: 🏗️ Construint l'aplicació Next.js
+        run: npm run build
+
+      - name: 🚀 Desplegant a producció amb SCP
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/prod_key.pem
+          chmod 600 ~/prod_key.pem
+          mkdir -p ./deploy
+          cp -r .next package.json public ./deploy
+          echo "Desplegat a producció" > ./deploy/last_deploy.txt
+          date >> ./deploy/last_deploy.txt
+          scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i "~/prod_key.pem" ./deploy/* \
+          ${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}:/home/a23mohbounij/web/simplyswap.daw.inspedralbes.cat/public_html/
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i "~/prod_key.pem" \
+          ${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }} "chmod -R 755 /home/a23mohbounij/web/simplyswap.daw.inspedralbes.cat/public_html/"
+
+      - run: echo "L'estat de la feina és ${{ job.status }}."
