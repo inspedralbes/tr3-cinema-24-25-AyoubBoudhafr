@@ -5,9 +5,11 @@ on:
   push:
     branches:
       - dev
+      - main
 
 jobs:
   Test-i-Pujar-a-Produccio:
+    if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
 
     steps:
@@ -47,3 +49,22 @@ jobs:
           ${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }} "chmod -R 755 /home/a23mohbounij/web/simplyswap.daw.inspedralbes.cat/public_html/"
 
       - run: echo "L'estat de la feina és ${{ job.status }}."
+
+  Deploy-to-Server:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H a23mohbounij.daw.inspedralbes.cat >> ~/.ssh/known_hosts
+
+      - name: Deploy files
+        run: |
+          rsync -avz --delete ./ ${{ secrets.PROD_USER }}@daw.inspedralbes.cat:/home/${{ secrets.PROD_USER }}/web/a23mohbounij.daw.inspedralbes.cat/public_html/ghactions-AyoubBoudhafr
