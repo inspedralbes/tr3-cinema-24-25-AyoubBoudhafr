@@ -1,0 +1,191 @@
+[
+    {
+        "id": 1,
+        "nombre": "iPhone 13",
+        "precio": 799,
+        "categoria": 1,
+        "descripcion": "iPhone 13 en excelente estado",
+        "imagenes": ["/assets/iphone13_1.webp","/assets/iphone13_2.webp","/assets/iphone13_3.webp","/assets/iphone13_4.webp","/assets/iphone13_5.webp","/assets/iphone13_6.webp"],
+        "envioDisponible": true
+    },
+    {
+        "id": 2,
+        "nombre": "Samsung Galaxy S21",
+        "precio": 699,
+        "categoria": 1,
+        "descripcion": "Samsung Galaxy S21 con caja y accesorios",
+        "imagenes": ["/assets/samsung_s21_1.webp","/assets/samsung_s21_2.webp","/assets/samsung_s21_3.webp","/assets/samsung_s21_4.webp"],
+        "envioDisponible": false
+    },
+    {
+        "id": 3,
+        "nombre": "MacBook Pro 16",
+        "precio": 2000,
+        "categoria": 1,
+        "descripcion": "MacBook Pro con chip M1 Pro",
+        "imagenes": ["/assets/macbookpro_1.webp","/assets/macbookpro_2.webp","/assets/macbookpro_3.webp","/assets/macbookpro_4.webp","/assets/macbookpro_5.webp","/assets/macbookpro_6.webp"],
+        "envioDisponible": true
+    },
+    {
+        "id": 4,
+        "nombre": "iPad Air 4",
+        "precio": 599,
+        "categoria": 1,
+        "descripcion": "iPad Air 4ta generación con chip A14 Bionic",
+        "imagenes": ["/assets/ipad4_1.webp","/assets/ipad4_2.webp","/assets/ipad4_3.webp","/assets/ipad4_4.webp","/assets/ipad4_5.webp","/assets/ipad4_6.webp","/assets/ipad4_7.webp","/assets/ipad4_8.webp","/assets/ipad4_9.webp"],
+        "envioDisponible": true
+    },
+    {
+        "id": 5,
+        "nombre": "Google Pixel 6",
+        "precio": 599,
+        "categoria": 1,
+        "descripcion": "Google Pixel 6 con cámara de 50MP",
+        "imagenes": ["/assets/googlepixel6.webp","/assets/googlepixel6_2.webp","/assets/googlepixel6_3.webp"],
+        "envioDisponible": false
+    },
+    {
+        "id": 6,
+        "nombre": "Sony PlayStation 5",
+        "precio": 499,
+        "categoria": 1,
+        "descripcion": "PlayStation 5 con soporte para 4K y ray tracing",
+        "imagenes": ["/assets/ps5_1.webp","/assets/ps5_2.webp","/assets/ps5_3.webp"],
+        "envioDisponible": true
+    },
+    {
+        "id": 7,
+        "nombre": "Dell XPS 13",
+        "precio": 1299,
+        "categoria": 1,
+        "descripcion": "Dell XPS 13 con procesador Intel i7 y pantalla 4K",
+        "imagenes": "https://www.dell.com/sites/csimages/Merchandizing_Imagery/all/xps_13_9300_hero_504x350.jpg",
+        "envioDisponible": true
+    },
+    {
+        "id": 8,
+        "nombre": "HP Spectre x360",
+        "precio": 1399,
+        "categoria": 1,
+        "descripcion": "HP Spectre x360 convertible con pantalla táctil 4K",
+        "imagenes": "https://www.hp.com/ctg/asset/tsg/en/14233162.png",
+        "envioDisponible": false
+    },
+    {
+        "id": 9,
+        "nombre": "Apple Watch Series 7",
+        "precio": 399,
+        "categoria": 1,
+        "descripcion": "Apple Watch Series 7 con pantalla siempre encendida",
+        "imagenes": "https://www.apple.com/v/watch/ae/images/overview/hero/hero__e69ctz39w27a_large.jpg",
+        "envioDisponible": true
+    },
+    {
+        "id": 10,
+        "nombre": "Nintendo Switch OLED",
+        "precio": 349,
+        "categoria": 1,
+        "descripcion": "Nintendo Switch OLED modelo con pantalla de 7 pulgadas",
+        "imagenes": "https://www.nintendo.com/images/page/switch/oled/switch-oled-hero.jpg",
+        "envioDisponible": false
+    },
+    {
+        "id": 11,
+        "nombre": "GoPro Hero 10",
+        "precio": 399,
+        "categoria": 1,
+        "descripcion": "GoPro Hero 10 con grabación en 5.3K y estabilización HyperSmooth",
+        "imagenes": "https://gopro.com/content/dam/gopro/brand-assets/heroes/hero10-black/hero10-black-fpo.jpg",
+        "envioDisponible": false
+    },
+    {
+        "id": 12,
+        "nombre": "Samsung QLED 55”",
+        "precio": 799,
+        "categoria": 1,
+        "descripcion": "Samsung QLED 55 pulgadas 4K con tecnología de Quantum Dot",
+        "imagenes": "https://images.samsung.com/is/image/samsung/p6pim/latin_en/qn55q60aafxza/gallery/qn55q60aafxza-01-01.jpg",
+        "envioDisponible": true
+    },
+    {
+        "id": 13,
+        "nombre": "Razer Blade 15",
+        "precio": 1699,
+        "categoria": 1,
+        "descripcion": "Razer Blade 15 con NVIDIA RTX 3070 y pantalla Full HD 144Hz",
+        "imagenes": "https://www.razer.com/assets/images/rb15-hero_2x.jpg",
+        "envioDisponible": true
+    },
+    {
+        "id": 14,
+        "nombre": "Bose QuietComfort 45",
+        "precio": 329,
+        "categoria": 1,
+        "descripcion": "Auriculares Bose QuietComfort 45 con cancelación activa de ruido",
+        "imagenes": "https://www.bose.com/content/dam/Bose_DAM/Web/consumer_electronics/Headphones/QC45/2021/QRv2_QC45_Hero_Grey.jpg",
+        "envioDisponible": false
+    },
+    {
+        "id": 15,
+        "nombre": "Microsoft Surface Pro 7",
+        "precio": 749,
+        "categoria": 1,
+        "descripcion": "Microsoft Surface Pro 7 con pantalla táctil de 12.3”",
+        "imagenes": "https://c.s-microsoft.com/en-us/CMSImages/Surface_Pro_7_Hero_3840x2160.jpg",
+        "envioDisponible": false
+    },
+    {
+        "id": 16,
+        "nombre": "Sony WH-1000XM4",
+        "precio": 348,
+        "categoria": 1,
+        "descripcion": "Sony WH-1000XM4 con cancelación de ruido líder en su clase",
+        "imagenes": "https://www.sony.com/image/307e4b145b49b40ad881e93b4600e4fa?fmt=png-alpha",
+        "envioDisponible": true
+    },
+    {
+        "id": 17,
+        "nombre": "Apple AirPods Pro",
+        "precio": 249,
+        "categoria": 1,
+        "descripcion": "Apple AirPods Pro con cancelación activa de ruido y modo transparente",
+        "imagenes": "https://www.apple.com/v/airpods-pro/b/images/overview/hero__czjzd13owuqi_large.jpg",
+        "envioDisponible": false
+    },
+    {
+        "id": 18,
+        "nombre": "Lenovo ThinkPad X1 Carbon",
+        "precio": 1599,
+        "categoria": 1,
+        "descripcion": "Lenovo ThinkPad X1 Carbon con Intel Core i7 y 16GB de RAM",
+        "imagenes": "https://www.lenovo.com/medias/lenovo-laptop-thinkpad-x1-carbon-gen-9.png",
+        "envioDisponible": false
+    },
+    {
+        "id": 19,
+        "nombre": "JBL Charge 5",
+        "precio": 179,
+        "categoria": 1,
+        "descripcion": "JBL Charge 5 con sonido estéreo y resistencia al agua IP67",
+        "imagenes": "https://www.jbl.com/on/demandware.static/-/Sites-master-catalog/default/dw772c2fa3/images/jbl-charge-5-hero.jpg",
+        "envioDisponible": false
+    },
+    {
+        "id": 20,
+        "nombre": "Xiaomi Mi 11",
+        "precio": 749,
+        "categoria": 1,
+        "descripcion": "Xiaomi Mi 11 con cámara de 108MP y pantalla AMOLED",
+        "imagenes": "https://www.mi.com/global/support/asset/images/products/mi-11/hero.jpg",
+        "envioDisponible": true
+    },
+    {
+        "id": 21,
+        "nombre": "Bose SoundLink Revolve",
+        "precio": 229,
+        "categoria": 1,
+        "descripcion": "Bose SoundLink Revolve con sonido 360° y resistencia al agua IPX4",
+        "imagenes": "https://www.bose.com/content/dam/Bose_DAM/Web/consumer_electronics/Portable/Bose-SoundLink-Revolve/Wireless-Bluetooth-Speaker/SoundLinkRevolve_black.jpg",
+        "envioDisponible": false
+    }
+]

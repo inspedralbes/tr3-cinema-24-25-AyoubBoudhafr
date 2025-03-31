@@ -1,0 +1,106 @@
+.producto {
+  position: relative;
+  padding: 20px;
+  margin: 10px auto;
+  border-radius: 10px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease; 
+}
+
+.producto:hover{
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.envioIcono {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  margin-right: 6px;
+}
+
+.imagen-container {
+  position: relative;
+  margin-bottom: 15px;
+  overflow: hidden;
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+}
+
+.imagen-producto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.boton-imagen {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.55);
+  border: none;
+  padding: 5px;
+  z-index: 10;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s ease-in-out;
+}
+.boton-imagen:hover{
+  background: rgba(255, 255, 255, 0.8);
+}
+.boton-imagen.left {
+  left: 10px;
+}
+
+.boton-imagen.right {
+  right: 10px;
+}
+.boton-imagen svg {
+  fill: #333;
+  width: 24px;
+  height: 24px;
+}
+
+.envio-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.envio-icono {
+  width: 24px;
+  height: 24px;
+}
+
+.envio-info span {
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center; 
+}
+.disponible{
+  color: rgb(7, 115, 7);
+}
+.precio{
+  color: black;
+}
+.nombre{
+  color: black;
+}
+.enPersona{
+  color: rgb(151, 32, 181);
+}
+.camion{
+  width: 30px;
+  height: 30px;
+}
+.persona{
+  width: 20px;
+  height: 20px;
+}
