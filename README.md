@@ -20,7 +20,6 @@ SimplySwap és una plataforma web moderna i fàcil d'utilitzar dissenyada per a 
 ### Frontend
 - Next.js
 - React
-- Tailwind CSS
 - Docker
 - Jest i Testing Library per testing
 - GitHub Actions per CI/CD
