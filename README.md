@@ -94,6 +94,11 @@ Aquest projecte forma part del grau superior de Desenvolupament d'Aplicacions We
 - Optimització de rendiment
 - Millores en la seguretat
 
+## Pempot 
+- [URL Pempot](https://design.penpot.app/#/view?file-id=456eee66-5663-80cb-8005-d3666a77d139&page-id=456eee66-5663-80cb-8005-d3666a77d13a&section=interactions&index=0&share-id=4bbd81c9-0a59-81dd-8005-efadcc6987fc)
+
+## Produccio
+- [URL Produccio](http://simplyswap.daw.inspedralbes.cat/inmobiliaria)
 Tot i que el projecte es va desenvolupar inicialment com a treball de classe, tinc la intenció de continuar treballant-hi en un futur per implementar totes les funcionalitats pendents i convertir-lo en una plataforma completament funcional.
 
 
