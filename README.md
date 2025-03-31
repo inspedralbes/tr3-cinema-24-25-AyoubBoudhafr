@@ -99,6 +99,8 @@ Aquest projecte forma part del grau superior de Desenvolupament d'Aplicacions We
 
 ## Produccio
 - [URL Produccio](http://simplyswap.daw.inspedralbes.cat/inmobiliaria)
+
+## Futur
 Tot i que el projecte es va desenvolupar inicialment com a treball de classe, tinc la intenció de continuar treballant-hi en un futur per implementar totes les funcionalitats pendents i convertir-lo en una plataforma completament funcional.
 
 
